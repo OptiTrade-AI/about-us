@@ -18,6 +18,16 @@
             color: #e2e8f0;
             overflow-x: hidden;
             scroll-behavior: smooth;
+            position: relative;
+        }
+
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
         }
 
         .container {
@@ -29,7 +39,8 @@
         header {
             padding: 120px 0;
             text-align: center;
-            background: linear-gradient(180deg, rgba(10, 14, 26, 0.9), rgba(10, 14, 26, 0.7)), url('https://images.unsplash.com/photo-1614029952343-8f7f7293bbb8?auto=format&fit=crop&q=80') no-repeat center/cover;
+            background: linear-gradient(180deg, rgba(10, 14, 26, 0.7), rgba(10, 14, 26, 0.5));
+            position: relative;
         }
 
         header h1 {
@@ -59,7 +70,7 @@
 
         .content-section {
             padding: 60px 0;
-            background: linear-gradient(180deg, #0a0e1a 0%, #141c33 100%);
+            background: linear-gradient(180deg, rgba(10, 14, 26, 0.6) 0%, rgba(20, 28, 51, 0.6) 100%);
         }
 
         h2 {
@@ -89,7 +100,7 @@
         }
 
         .content-item {
-            background: rgba(20, 28, 51, 0.8);
+            background: rgba(20, 28, 51, 0.85);
             padding: 24px;
             border-radius: 12px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -105,7 +116,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, rgba(99, 102, 241, 0.2), transparent);
+            background: linear-gradient(90deg, rgba(99, 102, 241, 0.15), transparent);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -135,7 +146,7 @@
         footer {
             padding: 40px 0;
             text-align: center;
-            background: #0a0e1a;
+            background: rgba(10, 14, 26, 0.8);
         }
 
         footer p {
@@ -168,6 +179,7 @@
     </style>
 </head>
 <body>
+    <canvas id="starfield"></canvas>
     <header>
         <div class="container">
             <h1>🚀 OptiTrade-AI</h1>
@@ -240,5 +252,90 @@
             <p>📈 Trade smarter with AI-powered options and stock analysis.</p>
         </div>
     </footer>
+
+    <script>
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const stars = [];
+        const numStars = 600; // Increased star count for a denser field
+
+        class Star {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.z = Math.random() * canvas.width;
+                this.size = Math.random() * 2.5;
+                this.speed = Math.random() * 0.8 + 0.3; // Varied speeds
+                this.angle = Math.random() * Math.PI * 2; // Random direction
+            }
+
+            update() {
+                this.z -= this.speed;
+                if (this.z <= 0) {
+                    this.reset();
+                }
+                // Add slight angular movement for dynamic paths
+                this.x += Math.cos(this.angle) * 0.2;
+                this.y += Math.sin(this.angle) * 0.2;
+            }
+
+            draw() {
+                const sx = (this.x / this.z) * canvas.width + canvas.width / 2;
+                const sy = (this.y / this.z) * canvas.height + canvas.height / 2;
+                const size = this.size * (canvas.width / this.z);
+
+                ctx.beginPath();
+                ctx.arc(sx, sy, Math.max(size, 0.5), 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(165, 180, 252, ${1 - this.z / canvas.width})`;
+                ctx.fill();
+
+                // Add occasional glowing stars
+                if (Math.random() < 0.02) {
+                    ctx.beginPath();
+                    ctx.arc(sx, sy, Math.max(size * 1.5, 1), 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(147, 197, 253, ${0.3 * (1 - this.z / canvas.width)})`;
+                    ctx.fill();
+                }
+            }
+        }
+
+        for (let i = 0; i < numStars; i++) {
+            stars.push(new Star());
+        }
+
+        let mouseX = 0;
+        let mouseY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX - canvas.width / 2;
+            mouseY = e.clientY - canvas.height / 2;
+        });
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                // Add parallax effect based on mouse position
+                star.x += mouseX * 0.0001 * star.z / canvas.width;
+                star.y += mouseY * 0.0001 * star.z / canvas.width;
+                star.update();
+                star.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
 </body>
 </html>
