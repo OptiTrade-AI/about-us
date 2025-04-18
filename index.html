@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OptiTrade-AI: AI-Powered Options & Stock Analysis</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,8 +16,11 @@
         body {
             background: #0a0e1a;
             color: #e2e8f0;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             position: relative;
         }
 
@@ -31,226 +34,185 @@
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
-            padding: 120px 0;
-            text-align: center;
-            background: linear-gradient(180deg, rgba(10, 14, 26, 0.7), rgba(10, 14, 26, 0.5));
             position: relative;
+            text-align: center;
+            padding: 20px;
+            z-index: 1;
         }
 
-        header h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 4.2rem;
+        .header {
+            margin-bottom: 20px;
+            animation: glowIn 1s ease-out;
+        }
+
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
             font-weight: 700;
-            background: linear-gradient(90deg, #6366f1, #a5b4fc);
+            background: linear-gradient(90deg, #60a5fa, #a5b4fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 16px;
-            animation: slideIn 1s ease-out;
+            text-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
         }
 
-        header p {
-            font-size: 1.4rem;
+        .header p {
+            font-size: 1.1rem;
             color: #94a3b8;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-            animation: slideIn 1.2s ease-out;
+            max-width: 500px;
+            margin: 10px auto;
+            line-height: 1.5;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(30px); }
+        .content-panels {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .panel {
+            background: rgba(20, 28, 51, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            width: 280px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(96, 165, 250, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: panelIn 1.2s ease-out;
+            cursor: pointer;
+        }
+
+        .panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(96, 165, 250, 0.4);
+        }
+
+        .panel h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            color: #60a5fa;
+            margin-bottom: 12px;
+            text-shadow: 0 0 5px rgba(96, 165, 250, 0.3);
+        }
+
+        .panel ul {
+            list-style: none;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .panel ul li {
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .panel ul li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #a5b4fc;
+            font-size: 0.8rem;
+        }
+
+        .panel ul li:hover {
+            color: #a5b4fc;
+        }
+
+        @keyframes glowIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes panelIn {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .content-section {
-            padding: 60px 0;
-            background: linear-gradient(180deg, rgba(10, 14, 26, 0.6) 0%, rgba(20, 28, 51, 0.6) 100%);
-        }
-
-        h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #6366f1;
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        h2::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background: #6366f1;
-            margin: 8px auto;
-            border-radius: 2px;
-        }
-
-        .content-flow {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .content-item {
-            background: rgba(20, 28, 51, 0.85);
-            padding: 24px;
-            border-radius: 12px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .content-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, rgba(99, 102, 241, 0.15), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .content-item:hover::before {
-            opacity: 1;
-        }
-
-        .content-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-        }
-
-        .content-item h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.6rem;
-            color: #a5b4fc;
-            margin-bottom: 12px;
-        }
-
-        .content-item p {
-            font-size: 1rem;
-            color: #cbd5e1;
-            line-height: 1.6;
-        }
-
         footer {
-            padding: 40px 0;
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
             text-align: center;
-            background: rgba(10, 14, 26, 0.8);
         }
 
         footer p {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
             color: #a5b4fc;
+            text-shadow: 0 0 5px rgba(96, 165, 250, 0.3);
         }
 
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.8rem;
-            }
-
-            header p {
-                font-size: 1.1rem;
-            }
-
-            h2 {
+            .header h1 {
                 font-size: 2rem;
             }
 
-            .content-item h3 {
-                font-size: 1.4rem;
+            .header p {
+                font-size: 0.9rem;
             }
 
-            .content-item p {
-                font-size: 0.9rem;
+            .content-panels {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .panel {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .panel h2 {
+                font-size: 1.2rem;
+            }
+
+            .panel ul {
+                font-size: 0.8rem;
             }
         }
     </style>
 </head>
 <body>
     <canvas id="starfield"></canvas>
-    <header>
-        <div class="container">
+    <div class="container">
+        <div class="header">
             <h1>🚀 OptiTrade-AI</h1>
-            <p>Powering options and stock analysis with AI-driven insights and real-time strategies.</p>
+            <p>AI-driven options & stock analysis for smarter trading.</p>
         </div>
-    </header>
-
-    <div class="content-section" id="why">
-        <div class="container">
-            <h2>🔥 Why OptiTrade-AI?</h2>
-            <div class="content-flow">
-                <div class="content-item">
-                    <h3>AI-Powered Analysis</h3>
-                    <p>Real-time recommendations for options and stocks using cutting-edge AI algorithms.</p>
-                </div>
-                <div class="content-item">
-                    <h3>Comprehensive Insights</h3>
-                    <p>Instant analysis of stocks and options with dynamic, AI-driven strategies.</p>
-                </div>
-                <div class="content-item">
-                    <h3>Risk & Reward Optimization</h3>
-                    <p>Data-backed intelligence to maximize returns while minimizing risks.</p>
-                </div>
+        <div class="content-panels">
+            <div class="panel" style="animation-delay: 0.2s;">
+                <h2>🔥 Why OptiTrade-AI?</h2>
+                <ul>
+                    <li>Real-time AI recommendations.</li>
+                    <li>Dynamic stock & options insights.</li>
+                    <li>Maximize returns, minimize risks.</li>
+                </ul>
+            </div>
+            <div class="panel" style="animation-delay: 0.4s;">
+                <h2>🧠 How It Works</h2>
+                <ul>
+                    <li>RSI, Bollinger Bands, IV analysis.</li>
+                    <li>AI news & trend sentiment.</li>
+                    <li>High-risk or conservative strategies.</li>
+                </ul>
+            </div>
+            <div class="panel" style="animation-delay: 0.6s;">
+                <h2>🚀 Who Is It For?</h2>
+                <ul>
+                    <li>Options traders using AI.</li>
+                    <li>Stock investors seeking trends.</li>
+                    <li>Analysts for data-driven decisions.</li>
+                </ul>
+            </ul>
             </div>
         </div>
     </div>
-
-    <div class="content-section" id="how">
-        <div class="container">
-            <h2>🧠 How It Works</h2>
-            <div class="content-flow">
-                <div class="content-item">
-                    <h3>Technical Indicators</h3>
-                    <p>Leverage Bollinger Bands, RSI, Implied Volatility, and more for precise analysis.</p>
-                </div>
-                <div class="content-item">
-                    <h3>Sentiment Analysis</h3>
-                    <p>AI-driven insights from news and trends to capture market perception.</p>
-                </div>
-                <div class="content-item">
-                    <h3>Custom Strategies</h3>
-                    <p>Tailored high-risk or conservative approaches to match your trading style.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="content-section" id="who">
-        <div class="container">
-            <h2>🚀 Who Is It For?</h2>
-            <div class="content-flow">
-                <div class="content-item">
-                    <h3>Options Traders</h3>
-                    <p>Supercharge your strategies with AI-powered options analysis.</p>
-                </div>
-                <div class="content-item">
-                    <h3>Stock Investors</h3>
-                    <p>Uncover deeper insights into stock market trends and opportunities.</p>
-                </div>
-                <div class="content-item">
-                    <h3>Smart Analysts</h3>
-                    <p>Make confident, data-driven decisions without the guesswork.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <footer>
-        <div class="container">
-            <p>📈 Trade smarter with AI-powered options and stock analysis.</p>
-        </div>
+        <p>📈 Trade smarter with AI-powered analysis.</p>
     </footer>
 
     <script>
@@ -265,7 +227,7 @@
         resizeCanvas();
 
         const stars = [];
-        const numStars = 600; // Increased star count for a denser field
+        const numStars = 1000; // Even more stars for a vibrant field
 
         class Star {
             constructor() {
@@ -276,9 +238,9 @@
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
                 this.z = Math.random() * canvas.width;
-                this.size = Math.random() * 2.5;
-                this.speed = Math.random() * 0.8 + 0.3; // Varied speeds
-                this.angle = Math.random() * Math.PI * 2; // Random direction
+                this.size = Math.random() * 2 + 0.5;
+                this.speed = Math.random() * 1.5 + 0.5; // Dynamic speed
+                this.angle = Math.random() * Math.PI * 2;
             }
 
             update() {
@@ -286,9 +248,8 @@
                 if (this.z <= 0) {
                     this.reset();
                 }
-                // Add slight angular movement for dynamic paths
-                this.x += Math.cos(this.angle) * 0.2;
-                this.y += Math.sin(this.angle) * 0.2;
+                this.x += Math.cos(this.angle) * 0.4;
+                this.y += Math.sin(this.angle) * 0.4;
             }
 
             draw() {
@@ -301,10 +262,9 @@
                 ctx.fillStyle = `rgba(165, 180, 252, ${1 - this.z / canvas.width})`;
                 ctx.fill();
 
-                // Add occasional glowing stars
-                if (Math.random() < 0.02) {
+                if (Math.random() < 0.04) {
                     ctx.beginPath();
-                    ctx.arc(sx, sy, Math.max(size * 1.5, 1), 0, Math.PI * 2);
+                    ctx.arc(sx, sy, Math.max(size * 2, 1), 0, Math.PI * 2);
                     ctx.fillStyle = `rgba(147, 197, 253, ${0.3 * (1 - this.z / canvas.width)})`;
                     ctx.fill();
                 }
@@ -326,9 +286,8 @@
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             stars.forEach(star => {
-                // Add parallax effect based on mouse position
-                star.x += mouseX * 0.0001 * star.z / canvas.width;
-                star.y += mouseY * 0.0001 * star.z / canvas.width;
+                star.x += mouseX * 0.0002 * star.z / canvas.width;
+                star.y += mouseY * 0.0002 * star.z / canvas.width;
                 star.update();
                 star.draw();
             });
