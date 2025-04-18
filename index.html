@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptiTrade-AI: AI-Powered Options & Stock Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: #0a0e1a;
+            color: #e2e8f0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 120px 0;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(10, 14, 26, 0.9), rgba(10, 14, 26, 0.7)), url('https://images.unsplash.com/photo-1614029952343-8f7f7293bbb8?auto=format&fit=crop&q=80') no-repeat center/cover;
+        }
+
+        header h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4.2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #6366f1, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+            animation: slideIn 1s ease-out;
+        }
+
+        header p {
+            font-size: 1.4rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            animation: slideIn 1.2s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-section {
+            padding: 60px 0;
+            background: linear-gradient(180deg, #0a0e1a 0%, #141c33 100%);
+        }
+
+        h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #6366f1;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #6366f1;
+            margin: 8px auto;
+            border-radius: 2px;
+        }
+
+        .content-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .content-item {
+            background: rgba(20, 28, 51, 0.8);
+            padding: 24px;
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(99, 102, 241, 0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .content-item:hover::before {
+            opacity: 1;
+        }
+
+        .content-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-item h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            color: #a5b4fc;
+            margin-bottom: 12px;
+        }
+
+        .content-item p {
+            font-size: 1rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            background: #0a0e1a;
+        }
+
+        footer p {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            color: #a5b4fc;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.8rem;
+            }
+
+            header p {
+                font-size: 1.1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .content-item h3 {
+                font-size: 1.4rem;
+            }
+
+            .content-item p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🚀 OptiTrade-AI</h1>
+            <p>Powering options and stock analysis with AI-driven insights and real-time strategies.</p>
+        </div>
+    </header>
+
+    <div class="content-section" id="why">
+        <div class="container">
+            <h2>🔥 Why OptiTrade-AI?</h2>
+            <div class="content-flow">
+                <div class="content-item">
+                    <h3>AI-Powered Analysis</h3>
+                    <p>Real-time recommendations for options and stocks using cutting-edge AI algorithms.</p>
+                </div>
+                <div class="content-item">
+                    <h3>Comprehensive Insights</h3>
+                    <p>Instant analysis of stocks and options with dynamic, AI-driven strategies.</p>
+                </div>
+                <div class="content-item">
+                    <h3>Risk & Reward Optimization</h3>
+                    <p>Data-backed intelligence to maximize returns while minimizing risks.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section" id="how">
+        <div class="container">
+            <h2>🧠 How It Works</h2>
+            <div class="content-flow">
+                <div class="content-item">
+                    <h3>Technical Indicators</h3>
+                    <p>Leverage Bollinger Bands, RSI, Implied Volatility, and more for precise analysis.</p>
+                </div>
+                <div class="content-item">
+                    <h3>Sentiment Analysis</h3>
+                    <p>AI-driven insights from news and trends to capture market perception.</p>
+                </div>
+                <div class="content-item">
+                    <h3>Custom Strategies</h3>
+                    <p>Tailored high-risk or conservative approaches to match your trading style.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section" id="who">
+        <div class="container">
+            <h2>🚀 Who Is It For?</h2>
+            <div class="content-flow">
+                <div class="content-item">
+                    <h3>Options Traders</h3>
+                    <p>Supercharge your strategies with AI-powered options analysis.</p>
+                </div>
+                <div class="content-item">
+                    <h3>Stock Investors</h3>
+                    <p>Uncover deeper insights into stock market trends and opportunities.</p>
+                </div>
+                <div class="content-item">
+                    <h3>Smart Analysts</h3>
+                    <p>Make confident, data-driven decisions without the guesswork.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>📈 Trade smarter with AI-powered options and stock analysis.</p>
+        </div>
+    </footer>
+</body>
+</html>
