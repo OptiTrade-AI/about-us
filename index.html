@@ -1,503 +1,1547 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OptiTrade-AI: AI-Powered Options & Stock Analysis</title>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;800&family=Inter:wght@300;500&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OptiTrade AI – The Future of Intelligent Trading</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q168DZHMRN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-Q168DZHMRN');
+    </script>
+    <meta name="description"
+        content="OptiTrade AI: Hedge‑fund level analytics for options traders. Screen opportunities, analyze sentiment, and act with confidence." />
+    <meta property="og:title" content="OptiTrade AI – Intelligent Options Trading" />
+    <meta property="og:description"
+        content="AI‑powered options intelligence. Find high‑probability setups, manage risk, and trade with conviction." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og-image.jpg" />
+    <meta name="theme-color" content="#0fa9e6" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
+        :root {
+            --navy: #0a192f;
+            --light-navy: #112240;
+            --lightest-navy: #233554;
+            --slate: #8892b0;
+            --light-slate: #a8b2d1;
+            --lightest-slate: #ccd6f6;
+            --white: #e6f1ff;
+            --blue: #0fa9e6;
+            --blue-tint: rgba(15, 169, 230, .1);
+            --blue-shadow: rgba(15, 169, 230, .3);
+            --font-sans: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+            --nav-height: 70px;
+            --radius: 12px
+        }
+
+        *,
+        *::before,
+        *::after {
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth
         }
 
         body {
-            background: #0a0e1a;
-            color: #e2e8f0;
-            overflow: hidden;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
+            font-family: var(--font-sans);
+            background-color: var(--navy);
+            color: var(--slate);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            transition: background-image 1s ease;
+            padding-top: var(--nav-height);
+            background-image:
+                radial-gradient(ellipse at 70% 80%, var(--gradient-color-1, rgba(15, 169, 230, .15)), transparent 50%),
+                radial-gradient(ellipse at 10% 20%, var(--gradient-color-2, rgba(15, 169, 230, .15)), transparent 50%);
+            background-attachment: fixed
         }
 
-        #starfield {
+        body.scrolled {
+            --gradient-color-1: rgba(15, 230, 169, .15);
+            --gradient-color-2: rgba(169, 15, 230, .15)
+        }
+
+        /* Progress Bar */
+        .progress-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
+            height: 4px;
+            z-index: 1001
+        }
+
+        #progress-bar {
             height: 100%;
-            z-index: -1;
+            width: 0;
+            background-image: linear-gradient(90deg, var(--blue), #00c6ff);
+            transition: width .1s linear
         }
 
-        .container {
-            position: relative;
-            text-align: center;
-            padding: 20px;
-            z-index: 1;
-        }
-
-        .header {
-            margin-bottom: 20px;
-            animation: pulseGlow 2s ease-in-out infinite;
-        }
-
-        .header h1 {
-            font-family: 'Exo 2', sans-serif;
-            font-size: 3.2rem;
-            font-weight: 800;
-            background: linear-gradient(90deg, #38bdf8, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px rgba(56, 189, 248, 0.7);
-        }
-
-        .header p {
-            font-size: 1rem;
-            color: #a1a1aa;
-            max-width: 500px;
-            margin: 8px auto;
-            line-height: 1.5;
-            text-shadow: 0 0 5px rgba(167, 139, 250, 0.3);
-        }
-
-        .content-panels {
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: var(--nav-height);
+            padding: 0 clamp(20px, 4vw, 50px);
             display: flex;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(10, 25, 47, .85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: top .3s ease-in-out, background-color .5s ease, backdrop-filter .5s ease, box-shadow .5s ease
         }
 
-        .panel {
-            background: rgba(17, 24, 39, 0.9);
-            border-radius: 12px;
-            padding: 16px;
-            width: 260px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            animation: hologramIn 1.5s ease-out;
-            cursor: pointer;
+        .nav--top {
+            background-color: transparent;
+            backdrop-filter: none;
+            box-shadow: none
+        }
+
+        .nav--top .logo,
+        .nav--top .nav-links a {
+            text-shadow: 0 1px 4px rgba(0, 0, 0, .5)
+        }
+
+        .nav--hidden {
+            top: calc(-1 * var(--nav-height))
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--white);
+            letter-spacing: .3px
+        }
+
+        .logo span {
+            color: var(--blue)
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px
+        }
+
+        .nav-links a {
+            color: var(--lightest-slate);
+            text-decoration: none;
+            font-weight: 400;
+            position: relative;
+            padding: 5px 0;
+            transition: color .25s ease
+        }
+
+        .nav-links a svg {
+            display: none;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--blue)
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background: var(--blue);
+            transition: width .25s ease
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%
+        }
+
+        .nav-toggle {
+            display: none;
+        }
+
+        /* --- Hero Section (Centered for Impact) --- */
+        .hero {
+            min-height: calc(100svh - var(--nav-height));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 10%;
             position: relative;
             overflow: hidden;
+            scroll-margin-top: calc(var(--nav-height) + 16px)
         }
 
-        .panel::before {
-            content: '';
+        #hero-canvas {
             position: absolute;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, rgba(56, 189, 248, 0.2), rgba(167, 139, 250, 0.2));
+            z-index: 1;
+            pointer-events: none
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 920px
+        }
+
+        .hero h1 {
+            font-size: clamp(28px, 8.5vw, 64px);
+            color: var(--white);
+            font-weight: 700;
+            margin: 0 0 16px;
+            line-height: 1.08
+        }
+
+        .hero p {
+            font-size: clamp(16px, 2.1vw, 20px);
+            max-width: 680px;
+            margin-bottom: 32px;
+            color: var(--light-slate);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Controls (can be hidden on small screens) */
+        #controls-panel {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 3;
+            background: rgba(17, 34, 64, .6);
+            backdrop-filter: blur(5px);
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--lightest-navy);
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        #controls-panel label {
+            font-size: 12px;
+            color: var(--light-slate)
+        }
+
+        #controls-panel input[type="color"] {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border: 0;
+            background: transparent;
+            cursor: pointer
+        }
+
+        #controls-panel input[type="color"]::-webkit-color-swatch {
+            border-radius: 50%;
+            border: 2px solid var(--light-slate)
+        }
+
+        /* Scroll cue */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            color: var(--white);
+            text-align: center
+        }
+
+        .scroll-down-arrow {
+            width: 24px;
+            height: 24px;
+            border-left: 2px solid var(--white);
+            border-bottom: 2px solid var(--white);
+            transform: rotate(-45deg);
+            animation: bounce 2s infinite
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0) rotate(-45deg)
+            }
+
+            40% {
+                transform: translateY(-15px) rotate(-45deg)
+            }
+
+            60% {
+                transform: translateY(-5px) rotate(-45deg)
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            margin-right: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+            font-size: 16px;
+            border: 2px solid var(--blue);
+            cursor: pointer
+        }
+
+        .btn-primary {
+            background-image: linear-gradient(45deg, var(--blue) 0%, #00c6ff 100%);
+            color: #fff;
+            box-shadow: 0 4px 15px 0 rgba(15, 169, 230, .4)
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px 0 rgba(15, 169, 230, .5)
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--blue)
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--blue-tint);
+            box-shadow: 0 0 0 4px var(--blue-tint)
+        }
+
+        .hero-content>.animated-item:has(.btn) {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content>.animated-item:has(.btn)>.btn {
+            margin-right: 0;
+        }
+
+        /* Sections */
+        .section-wrapper {
+            position: relative;
+            z-index: 2
+        }
+
+        section {
+            padding: clamp(80px, 12vw, 140px) 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            scroll-margin-top: calc(var(--nav-height) + 16px)
+        }
+
+        /* --- REVERTED: About Section Text is now default left-aligned --- */
+        #about p {
+            /* Previous text-align: center removed */
+            margin-bottom: 1rem;
+            /* Added spacing */
+        }
+
+        .animated-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity .6s ease-out, transform .6s ease-out
+        }
+
+        .is-visible .animated-item {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        h2 {
+            font-size: clamp(28px, 4.2vw, 36px);
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--lightest-slate);
+            text-align: center
+        }
+
+        h2 span {
+            color: var(--blue)
+        }
+
+        .is-visible .animated-item--stagger:nth-child(1) {
+            transition-delay: 100ms
+        }
+
+        .is-visible .animated-item--stagger:nth-child(2) {
+            transition-delay: 200ms
+        }
+
+        .is-visible .animated-item--stagger:nth-child(3) {
+            transition-delay: 300ms
+        }
+
+        .is-visible .animated-item--stagger:nth-child(4) {
+            transition-delay: 400ms
+        }
+
+        /* --- ✨ ENHANCED CARDS ✨ --- */
+        .card-grid {
+            display: grid;
+            gap: 22px;
+            perspective: 1000px;
+        }
+
+        .glass-card {
+            background-color: rgba(17, 34, 64, .6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--lightest-navy);
+            border-radius: var(--radius);
+            padding: 26px;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+            will-change: transform;
+        }
+
+        .glass-card::before,
+        .glass-card::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            border-radius: inherit;
             opacity: 0;
             transition: opacity 0.4s ease;
         }
 
-        .panel:hover::before {
-            opacity: 1;
-        }
-
-        .panel:hover {
-            transform: translateY(-8px) rotateX(5deg) rotateY(5deg);
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
-        }
-
-        .panel:active::before {
-            background: radial-gradient(circle, rgba(56, 189, 248, 0.5), transparent);
-            opacity: 1;
-            animation: ripple 0.5s ease-out;
-        }
-
-        .panel h2 {
-            font-family: 'Exo 2', sans-serif;
-            font-size: 1.3rem;
-            color: #38bdf8;
-            margin-bottom: 10px;
-            text-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
-        }
-
-        .panel ul {
-            list-style: none;
-            font-size: 0.8rem;
-            color: #d4d4d8;
-            line-height: 1.6;
-            text-align: left;
-        }
-
-        .panel ul li {
-            margin-bottom: 6px;
-            position: relative;
-            padding-left: 20px;
-            transition: color 0.3s ease;
-        }
-
-        .panel ul li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: #a78bfa;
-            font-size: 0.9rem;
-        }
-
-        .panel ul li:hover {
-            color: #a78bfa;
-        }
-
-        #warp-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(90deg, #38bdf8, #a78bfa);
-            border: none;
-            border-radius: 20px;
-            padding: 10px 20px;
-            color: #0a0e1a;
-            font-family: 'Exo 2', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            z-index: 2;
-        }
-
-        #warp-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.7);
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% { text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); }
-            50% { text-shadow: 0 0 20px rgba(56, 189, 248, 0.8); }
-        }
-
-        @keyframes hologramIn {
-            from { opacity: 0; transform: translateY(30px) scale(0.9); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        @keyframes ripple {
-            0% { opacity: 1; transform: scale(0); }
-            100% { opacity: 0; transform: scale(2); }
-        }
-
-        footer {
-            position: absolute;
-            bottom: 10px;
-            left: 0;
-            right: 0;
-            text-align: center;
+        .glass-card::before {
+            background: radial-gradient(350px circle at var(--mouse-x) var(--mouse-y),
+                    rgba(15, 169, 230, 0.15),
+                    transparent 80%);
             z-index: 1;
         }
 
-        footer p {
-            font-family: 'Exo 2', sans-serif;
-            font-size: 0.85rem;
-            color: #a78bfa;
-            text-shadow: 0 0 5px rgba(167, 139, 250, 0.4);
+        .glass-card::after {
+            border: 2px solid transparent;
+            background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y),
+                    rgba(15, 169, 230, 0.5),
+                    transparent 60%) border-box;
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: 2;
+        }
+
+        .glass-card:hover::before,
+        .glass-card:hover::after {
+            opacity: 1;
+        }
+
+        .glass-card:hover {
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
+        }
+
+        .glass-card>* {
+            position: relative;
+            z-index: 3;
+        }
+
+        /* Features */
+        .features {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        /* --- REVERTED: Feature card text is now default left-aligned --- */
+        /* .feature { text-align: center; } was removed */
+        .feature .icon {
+            color: var(--blue);
+            margin-bottom: 16px
+        }
+
+        .feature h3 {
+            color: var(--lightest-slate);
+            margin: 0 0 8px;
+            font-size: 20px
+        }
+
+        /* Edge */
+        .edge-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto
+        }
+
+        .edge-item {
+            display: flex;
+            gap: 18px;
+            align-items: center
+        }
+
+        .edge-icon {
+            background-color: var(--light-navy);
+            border-radius: 50%;
+            min-width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--blue);
+            border: 2px solid var(--blue);
+            transform: scale(0);
+            transition: transform .5s cubic-bezier(.25, 1, .5, 1)
+        }
+
+        .is-visible .edge-icon {
+            transform: scale(1)
+        }
+
+        .edge-text h3 {
+            margin: 0 0 6px;
+            color: var(--lightest-slate);
+            font-size: 18px
+        }
+
+        /* Values */
+        .values-grid {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .value-card {
+            text-align: center
+        }
+
+        .value-card .icon {
+            color: var(--blue);
+            margin-bottom: 12px
+        }
+
+        .value-card h3 {
+            color: var(--lightest-slate);
+            margin-bottom: 8px
+        }
+
+        /* Pricing */
+        .pricing {
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            margin-top: 28px
+        }
+
+        /* Pricing cards remain centered as content is scannable */
+        .plan {
+            text-align: center;
+        }
+
+        .plan .btn {
+            margin-right: 0;
+        }
+
+        .plan h3 {
+            margin: 0;
+            color: var(--blue);
+            font-size: 22px
+        }
+
+        .plan p {
+            min-height: 72px;
+            color: var(--light-slate)
+        }
+
+        .plan .price {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--white);
+            margin: 16px 0
+        }
+
+        .plan.pro {
+            border-color: var(--blue);
+            transform: scale(1.04);
+        }
+
+        .plan.pro:hover {
+            transform: var(--transform-var, scale(1.04));
+        }
+
+        /* Community */
+        #community p {
+            max-width: 680px;
+            margin: 0 auto 24px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        #community .community-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        /* Footer */
+        .site-footer {
+            position: relative;
+            padding: 80px 5% 40px;
+            background-color: #020c1b;
+            background-image: linear-gradient(rgba(136, 146, 176, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(136, 146, 176, .05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            border-top: 1px solid var(--lightest-navy);
+            box-shadow: 0 -5px 20px -10px rgba(0, 0, 0, .3);
+            z-index: 5;
+            scroll-margin-top: calc(var(--nav-height) + 16px)
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative
+        }
+
+        .footer-grid {
+            display: grid;
+            gap: 32px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            margin-bottom: 48px
+        }
+
+        .footer-brand .footer-logo {
+            font-size: 24px;
+            color: var(--white);
+            margin: 0 0 10px
+        }
+
+        .footer-brand .footer-logo span {
+            color: var(--blue)
+        }
+
+        .footer-brand p {
+            color: var(--light-slate);
+            margin-bottom: 18px;
+            max-width: 320px
+        }
+
+        .socials {
+            display: flex;
+            gap: 12px
+        }
+
+        .social {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            border: 1px solid var(--lightest-navy);
+            background: transparent;
+            color: var(--lightest-slate);
+            text-decoration: none;
+            transition: all .2s ease
+        }
+
+        .social:hover {
+            transform: translateY(-3px) scale(1.08);
+            background-color: var(--blue);
+            color: var(--white);
+            border-color: var(--blue);
+            box-shadow: 0 0 20px var(--blue-shadow)
+        }
+
+        .footer-col h4 {
+            color: var(--lightest-slate);
+            margin: 0 0 14px;
+            font-size: 16px;
+            font-weight: 600
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: grid;
+            gap: 10px
+        }
+
+        .footer-col a {
+            color: var(--slate);
+            text-decoration: none;
+            position: relative;
+            padding-left: 14px;
+            transition: color .2s ease
+        }
+
+        .footer-col a::before {
+            content: "›";
+            position: absolute;
+            left: 0;
+            opacity: .5;
+            transition: all .2s ease
+        }
+
+        .footer-col a:hover {
+            color: var(--blue)
+        }
+
+        .footer-col a:hover::before {
+            color: var(--blue);
+            opacity: 1;
+            transform: translateX(3px)
+        }
+
+        .newsletter h4 {
+            margin-bottom: 10px
+        }
+
+        .newsletter p {
+            font-size: 14px;
+            margin-bottom: 14px;
+            color: var(--light-slate)
+        }
+
+        .newsletter-form {
+            position: relative
+        }
+
+        .newsletter-form input {
+            width: 100%;
+            background: var(--navy);
+            border: 1px solid var(--lightest-navy);
+            color: var(--lightest-slate);
+            padding: 12px 48px 12px 14px;
+            border-radius: 10px;
+            outline: none;
+            transition: border-color .25s, box-shadow .25s
+        }
+
+        .newsletter-form input::placeholder {
+            color: var(--slate)
+        }
+
+        .newsletter-form input:focus {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px var(--blue-tint)
+        }
+
+        .newsletter-form button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            bottom: 5px;
+            width: 38px;
+            border-radius: 8px;
+            border: none;
+            background-color: var(--blue);
+            color: var(--white);
+            cursor: pointer;
+            transition: background-color .25s, transform .25s
+        }
+
+        .newsletter-form button:hover {
+            background-color: #00c6ff;
+            transform: scale(1.05)
+        }
+
+        .newsletter .newsletter-note {
+            display: block;
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--slate);
+            opacity: .85
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--lightest-navy);
+            margin-top: 48px;
+            padding-top: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 14px
+        }
+
+        .footer-legal a {
+            color: var(--slate);
+            text-decoration: none;
+            margin-left: 18px;
+            transition: color .2s ease
+        }
+
+        .footer-legal a:hover {
+            color: var(--blue)
+        }
+
+        .back-to-top {
+            position: absolute;
+            right: 0;
+            top: -25px;
+            background: var(--light-navy);
+            color: var(--lightest-slate);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid var(--lightest-navy);
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            transition: all .25s ease;
+            box-shadow: 0 0 20px rgba(0, 0, 0, .2)
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            background-color: var(--blue);
+            color: #fff;
+            box-shadow: 0 8px 20px var(--blue-shadow)
+        }
+
+        /* A11y focus */
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible {
+            outline: 3px solid var(--blue);
+            outline-offset: 2px
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0
+        }
+
+        /* --- Responsive Styles --- */
+        @media (max-width: 900px) {
+
+            .nav-toggle,
+            .nav-links {
+                display: none;
+            }
         }
 
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2rem;
+            .footer-bottom {
+                flex-direction: column-reverse;
+                text-align: center
             }
 
-            .header p {
-                font-size: 0.85rem;
+            .back-to-top {
+                display: none;
             }
 
-            .content-panels {
-                flex-direction: column;
+            #controls-panel {
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 15px;
+                width: max-content;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important
+            }
+
+            .scroll-down {
+                display: none
+            }
+        }
+
+        button,
+        .btn,
+        a {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation
+        }
+
+        /* Typed cursor & wrapping stability */
+        .typed-wrap {
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .typed-cursor {
+            display: inline-block;
+            vertical-align: baseline;
+            line-height: 1;
+            transform: translateY(0);
+            pointer-events: none;
+        }
+
+        @keyframes typedjsBlink {
+            0% {
+                opacity: 1
+            }
+
+            49% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0
+            }
+
+            99% {
+                opacity: 0
+            }
+
+            100% {
+                opacity: 1
+            }
+        }
+
+        .typed-cursor {
+            animation: typedjsBlink 1s infinite;
+        }
+
+        @media (max-width: 600px) {
+            :root {
+                --nav-height: 64px
+            }
+
+            nav {
+                padding: 0 16px;
+                justify-content: center;
+            }
+
+            .logo {
+                font-size: 20px
+            }
+
+            .hero {
+                padding: 0 5%;
+                min-height: calc(90svh - var(--nav-height));
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 8vw, 2.6rem);
+                line-height: 1.15;
+                min-height: 4.5rem;
+                display: flex;
                 align-items: center;
+                justify-content: center;
+                margin-bottom: 0.75rem;
             }
 
-            .panel {
-                width: 90%;
-                max-width: 280px;
+            .typed-wrap {
+                min-height: 2.6em;
+                white-space: normal;
             }
 
-            .panel h2 {
-                font-size: 1.2rem;
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 24px;
+                max-width: 42ch;
+                margin-left: auto;
+                margin-right: auto;
             }
 
-            .panel ul {
-                font-size: 0.75rem;
+            .hero-content>.animated-item:has(.btn) {
+                flex-direction: column;
+                width: 100%;
+                align-items: center;
+                gap: 1rem;
+                margin-top: 2rem;
             }
 
-            #warp-button {
-                top: 10px;
-                right: 10px;
-                padding: 8px 16px;
-                font-size: 0.8rem;
+            .hero-content>.animated-item:has(.btn) .btn {
+                width: 80%;
+                max-width: 300px;
+                padding: 12px 22px;
+            }
+
+            .card-grid,
+            .features,
+            .values-grid,
+            .pricing {
+                gap: 16px
+            }
+
+            .glass-card {
+                padding: 20px;
+                border-radius: 10px
+            }
+
+            .edge-item {
+                align-items: flex-start
+            }
+
+            .edge-icon {
+                min-width: 48px;
+                height: 48px
+            }
+
+            section {
+                padding: clamp(50px, 16vw, 70px) 5%;
+            }
+
+            .footer-grid {
+                gap: 20px
+            }
+
+            .social {
+                width: 48px;
+                height: 48px
+            }
+        }
+
+        @media (max-width: 400px) {
+            h2 {
+                font-size: 1.75rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .hero-content>.animated-item:has(.btn) {
+                margin-top: 2.25rem;
             }
         }
     </style>
 </head>
+
 <body>
-    <canvas id="starfield"></canvas>
-    <button id="warp-button">Engage Warp Drive</button>
-    <div class="container">
-        <div class="header">
-            <h1>🚀 OptiTrade-AI</h1>
-            <p>AI-driven options & stock analysis for smarter trading.</p>
-        </div>
-        <div class="content-panels">
-            <div class="panel" style="animation-delay: 0.2s;">
-                <h2>🔥 Why OptiTrade-AI?</h2>
-                <ul>
-                    <li>Real-time AI recommendations.</li>
-                    <li>Dynamic stock & options insights.</li>
-                    <li>Maximize returns, minimize risks.</li>
-                </ul>
-            </div>
-            <div class="panel" style="animation-delay: 0.4s;">
-                <h2>🧠 How It Works</h2>
-                <ul>
-                    <li>Techincal/Fundamental Analysis.</li>
-                    <li>AI news & trend sentiment.</li>
-                    <li>High-risk or conservative strategies.</li>
-                </ul>
-            </div>
-            <div class="panel" style="animation-delay: 0.6s;">
-                <h2>🚀 Who Is It For?</h2>
-                <ul>
-                    <li>Options traders wanting an edge.</li>
-                    <li>Stock investors seeking trends.</li>
-                    <li>Analysts for data-driven decisions.</li>
-                </ul>
-            </div>
-        </div>
+    <div class="progress-container" aria-hidden="true">
+        <div id="progress-bar"></div>
     </div>
-    <footer>
-        <p>📈 Trade smarter with AI-powered analysis.</p>
-    </footer>
 
+    <nav class="nav--top" role="navigation" aria-label="Primary">
+        <div class="logo">OptiTrade<span>AI</span></div>
+        <button class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+            <span class="hamburger" aria-hidden="true"></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#about" data-section="about">About<svg xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="16" x2="12" y2="12" />
+                        <line x1="12" y1="8" x2="12.01" y2="8" />
+                    </svg></a></li>
+            <li><a href="#edge" data-section="edge">Our Edge<svg xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+                        <polyline points="13 2 13 9 20 9" />
+                    </svg></a></li>
+            <li><a href="#features" data-section="features">Features<svg xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                        <line x1="3" y1="9" x2="21" y2="9" />
+                        <line x1="9" y1="21" x2="9" y2="9" />
+                    </svg></a></li>
+            <li><a href="#values" data-section="values">Values<svg xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg></a></li>
+            <li><a href="#pricing" data-section="pricing">Pricing<svg xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+                        <line x1="7" y1="7" x2="7.01" y2="7" />
+                    </svg></a></li>
+            <li><a href="#community" data-section="community">Community<svg xmlns="http://www.w3.org/2000/svg"
+                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg></a></li>
+        </ul>
+    </nav>
+
+    <div class="section-wrapper">
+        <header class="hero" id="hero">
+            <canvas id="hero-canvas" aria-hidden="true"></canvas>
+            <div class="hero-content">
+                <h1 class="animated-item">
+                    <span class="typed-wrap">
+                        <span id="typed-headline" aria-live="polite">The Future of Intelligent Trading.</span>
+                    </span>
+                </h1>
+                <p class="animated-item" style="transition-delay:100ms">OptiTrade AI is the first AI‑powered options
+                    trading platform that eliminates guesswork, optimizes strategies, and unlocks consistent
+                    profitability.</p>
+                <div class="animated-item" style="transition-delay:200ms">
+                    <a href="#community" class="btn btn-primary">Join the Waitlist</a>
+                    <a href="#features" class="btn btn-secondary">Explore Features</a>
+                </div>
+            </div>
+            <div id="controls-panel" aria-label="Hero animation controls">
+                <label for="particleColor">Particles</label>
+                <input type="color" id="particleColor" value="#0fe63a" />
+                <label for="lineColor">Lines</label>
+                <input type="color" id="lineColor" value="#0fa9e6" />
+            </div>
+            <div class="scroll-down" aria-hidden="true">
+                <div class="scroll-down-arrow"></div>
+            </div>
+        </header>
+
+        <main>
+            <section id="about">
+                <h2 class="animated-item">What is <span>OptiTrade AI?</span></h2>
+                <p class="animated-item" style="font-size:20px;color:var(--lightest-slate);transition-delay:100ms">Our
+                    mission is to democratize advanced trading intelligence.</p>
+                <p class="animated-item" style="transition-delay:200ms">We provide options traders and investors with
+                    powerful AI‑driven tools to find better opportunities, manage risk, and make smarter decisions. Our
+                    vision is to set a new global standard for how trading decisions are made by bridging the gap
+                    between institutional‑grade analytics and everyday traders.</p>
+            </section>
+
+            <section id="edge">
+                <h2 class="animated-item">The OptiTrade AI <span>Edge</span></h2>
+                <p class="animated-item"
+                    style="text-align:center;max-width:760px;margin:-10px auto 50px;transition-delay:100ms">Traditional
+                    tools show you raw data. Our proprietary algorithms interpret it for you, turning complex
+                    information into actionable signals.</p>
+                <div class="edge-timeline">
+                    <div class="edge-item animated-item animated-item--stagger">
+                        <div class="edge-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" role="img" aria-labelledby="edge-icon-1-title">
+                                <title id="edge-icon-1-title">AI Interpretation</title>
+                                <path d="M12 2a10 10 0 1 0 10 10c0-4.42-2.87-8.17-7-9.52" />
+                                <path d="M12 2v10h10" />
+                                <path d="M16 6.38A6.44 6.44 0 0 1 17.5 12c0 1.94-1.21 3.6-2.5 4.5" />
+                                <path d="m4.24 15.48-.5 1" />
+                                <path d="m19.76 15.48.5 1" />
+                                <path d="M12 21a2.5 2.5 0 0 1-2.5-2.5c0-1.05.5-2.05 1.5-2.5" />
+                                <path d="M8.5 16a2.5 2.5 0 0 0-2.5 2.5c0 .88.33 1.69.88 2.27" />
+                            </svg>
+                        </div>
+                        <div class="edge-text">
+                            <h3>AI‑Driven Signal Interpretation</h3>
+                            <p>Go beyond raw numbers. Our AI translates complex indicators like RSI and Bollinger Bands
+                                into high‑probability reversal or continuation signals.</p>
+                        </div>
+                    </div>
+                    <div class="edge-item animated-item animated-item--stagger">
+                        <div class="edge-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" role="img" aria-labelledby="edge-icon-2-title">
+                                <title id="edge-icon-2-title">Data Fusion</title>
+                                <path
+                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                                <line x1="12" x2="12" y1="22.08" y2="12" />
+                            </svg>
+                        </div>
+                        <div class="edge-text">
+                            <h3>Multi‑Factor Data Fusion</h3>
+                            <p>We fuse technicals, fundamentals, and AI‑analyzed news sentiment into a single, weighted
+                                output for a holistic market view.</p>
+                        </div>
+                    </div>
+                    <div class="edge-item animated-item animated-item--stagger">
+                        <div class="edge-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" role="img" aria-labelledby="edge-icon-3-title">
+                                <title id="edge-icon-3-title">Options Optimization</title>
+                                <circle cx="12" cy="12" r="10" />
+                                <circle cx="12" cy="12" r="6" />
+                                <circle cx="12" cy="12" r="2" />
+                            </svg>
+                        </div>
+                        <div class="edge-text">
+                            <h3>Options‑Specific Optimization</h3>
+                            <p>Built from the ground up for options, identifying optimal strike prices, expirations, and
+                                strategies like cash‑secured puts with ROC%.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="features">
+                <h2 class="animated-item">The Future of Trading<span>, Today.</span></h2>
+                <div class="features card-grid">
+                    <div class="feature glass-card animated-item animated-item--stagger">
+                        <div class="icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-scan-search">
+                                <path d="M3 7V5a2 2 0 0 1 2-2h2" />
+                                <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+                                <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+                                <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+                                <circle cx="12" cy="12" r="3" />
+                                <path d="m16 16-1.9-1.9" />
+                            </svg>
+                        </div>
+                        <h3>Options Screener & Optimizer</h3>
+                        <p>Scan the market to identify cash‑secured put opportunities, mean‑reversion setups, and
+                            aggressive signals with contract‑specific insights.</p>
+                    </div>
+                    <div class="feature glass-card animated-item animated-item--stagger">
+                        <div class="icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-layout-dashboard">
+                                <rect width="7" height="9" x="3" y="3" rx="1" />
+                                <rect width="7" height="5" x="14" y="3" rx="1" />
+                                <rect width="7" height="9" x="14" y="12" rx="1" />
+                                <rect width="7" height="5" x="3" y="16" rx="1" />
+                            </svg>
+                        </div>
+                        <h3>Swing Trading Dashboard</h3>
+                        <p>Visualize bullish/bearish setups like Golden Cross, EMA bounces, and Death Cross to find
+                            precise entry/exit points.</p>
+                    </div>
+                    <div class="feature glass-card animated-item animated-item--stagger">
+                        <div class="icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-newspaper">
+                                <path
+                                    d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h4" />
+                                <path d="M4 9h16" />
+                                <path d="M4 15h16" />
+                                <path d="M10 3v18" />
+                            </svg>
+                        </div>
+                        <h3>News Sentiment Analyzer</h3>
+                        <p>Receive AI‑driven summaries of stock‑specific and market‑wide sentiment via dashboards,
+                            reports, and Discord/email.</p>
+                    </div>
+                    <div class="feature glass-card animated-item animated-item--stagger">
+                        <div class="icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-bar-chart-big">
+                                <path d="M3 3v18h18" />
+                                <path d="M7 12h3v5H7z" />
+                                <path d="M12 7h3v10h-3z" />
+                                <path d="M17 14h3v3h-3z" />
+                            </svg>
+                        </div>
+                        <h3>Stock & Options Analysis Portal</h3>
+                        <p>Explore real‑time ratings, technical setups, and sentiment dashboards on our web platform.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="values">
+                <h2 class="animated-item">Our Core <span>Values</span></h2>
+                <div class="values-grid card-grid">
+                    <div class="value-card glass-card animated-item animated-item--stagger">
+                        <div class="icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" vector-effect="non-scaling-stroke" role="img"
+                                aria-label="Lightbulb">
+                                <title>Lightbulb</title>
+                                <!-- Bulb silhouette -->
+                                <path
+                                    d="M12 2.5c-4.4 0-8 3.4-8 7.75 0 2.46 1.16 4.1 2.52 5.32.9.78 1.66 1.44 2.03 2.3.22.51.35 1.04.4 1.58.06.54.5.95 1.05.95h4.58c.55 0 .99-.41 1.05-.95.05-.54.18-1.07.4-1.58.37-.86 1.13-1.52 2.03-2.3C18.84 14.35 20 12.71 20 10.25 20 5.9 16.4 2.5 12 2.5z" />
+                                <!-- Filament -->
+                                <path d="M9.5 11.5l2 2 2-2" />
+                                <!-- Neck / screw base -->
+                                <path d="M9 19.5h6" />
+                                <path d="M10.5 22h3" />
+                            </svg>
+
+                        </div>
+                        <h3>Innovation at the Core</h3>
+                        <p>We’re committed to continuous innovation so you always have a competitive edge with the most
+                            advanced AI‑driven tools.</p>
+                    </div>
+                    <div class="value-card glass-card animated-item animated-item--stagger">
+                        <div class="icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg>
+                        </div>
+                        <h3>Transparency & Integrity</h3>
+                        <p>Trust is everything. We provide honest, data‑driven insights without hidden agendas, so you
+                            can make decisions with confidence.</p>
+                    </div>
+                    <div class="value-card glass-card animated-item animated-item--stagger">
+                        <div class="icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
+                            </svg>
+                        </div>
+                        <h3>Empowerment Through Knowledge</h3>
+                        <p>We democratize trading intelligence by making institutional‑grade analytics accessible to all
+                            traders, novice and professional alike.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="pricing">
+                <h2 class="animated-item">Flexible <span>Pricing Tiers</span></h2>
+                <p class="animated-item"
+                    style="text-align:center;max-width:620px;margin:-10px auto 34px;transition-delay:100ms">We’ll offer
+                    plans for every level of trader. Full features and pricing will be announced closer to launch.</p>
+                <div class="pricing card-grid">
+                    <div class="plan glass-card animated-item animated-item--stagger">
+                        <h3>Basic ($29/mo)</h3>
+                        <p>Stock sentiment dashboards, daily market summaries, and limited trade alerts.</p>
+                        <div class="price">TBA</div>
+                        <a href="#community" class="btn btn-secondary">Get Notified</a>
+                    </div>
+                    <div class="plan glass-card pro animated-item animated-item--stagger">
+                        <h3>Pro ($79/mo)</h3>
+                        <p>Full access to options screening, swing dashboard, unlimited AI alerts, and sentiment
+                            reports.</p>
+                        <div class="price">TBA</div>
+                        <a href="#community" class="btn btn-primary">Get Notified</a>
+                    </div>
+                    <div class="plan glass-card animated-item animated-item--stagger">
+                        <h3>Elite ($199/mo)</h3>
+                        <p>Premium insights, Discord integration, and priority support.</p>
+                        <div class="price">TBA</div>
+                        <a href="#community" class="btn btn-secondary">Get Notified</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="community">
+                <h2 class="animated-item">Join the <span>Community</span></h2>
+                <p class="animated-item" style="transition-delay:100ms">Be among the first to experience the future of
+                    trading. Join our Discord for early updates, beta access, and to connect with fellow traders.</p>
+                <div class="community-buttons animated-item" style="transition-delay:200ms">
+                    <a href="https://discord.gg/AFsXv7yaTc" class="btn btn-primary" rel="noopener">Join the Discord</a>
+                    <a href="mailto:info@optitrade-ai.com" class="btn btn-secondary">Contact Us</a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer" id="footer" aria-labelledby="footer-heading">
+            <div class="footer-content">
+                <button class="back-to-top" aria-label="Back to top">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m18 15-6-6-6 6" />
+                    </svg>
+                </button>
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <h3 id="footer-heading" class="footer-logo">OptiTrade<span>AI</span></h3>
+                        <p>AI‑powered options intelligence. Find high‑probability setups, manage risk, and trade with
+                            conviction.</p>
+                        <div class="socials" aria-label="Social media links">
+                            <a href="https://x.com/justinjohnsond3" aria-label="X (Twitter)" class="social"
+                                target="_blank" rel="noopener noreferrer">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                </svg>
+                            </a>
+                            <a href="mailto:info@optitrade-ai.com" aria-label="Email" class="social">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="footer-col newsletter">
+                        <h4>Stay in the loop</h4>
+                        <p>Join the waitlist for launch updates and alpha features.</p>
+                        <form class="newsletter-form" action="https://formspree.io/f/mjkeravl" method="POST">
+                            <label class="sr-only" for="nl-email">Email address</label>
+                            <input id="nl-email" name="email" type="email" placeholder="you@domain.com" required />
+                            <button type="submit" aria-label="Subscribe to newsletter">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="22" y1="2" x2="11" y2="13" />
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                                </svg>
+                            </button>
+                        </form>
+                        <small class="newsletter-note">No spam. Unsubscribe anytime.</small>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>© <span id="year">2025</span> OptiTrade AI LLC. All rights reserved.</p>
+                    <div class="footer-legal">
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script defer src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script>
-        const canvas = document.getElementById('starfield');
-        const ctx = canvas.getContext('2d');
-        const warpButton = document.getElementById('warp-button');
-        let warpSpeed = false;
+        (function () {
+            const qs = (s, o = document) => o.querySelector(s); const qsa = (s, o = document) => o.querySelectorAll(s);
+            const on = (t, cb, o = window) => o.addEventListener(t, cb, { passive: true });
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+            document.addEventListener('DOMContentLoaded', () => {
+                // Year + back to top
+                qs('#year').textContent = new Date().getFullYear();
+                qs('.back-to-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+                // UPDATE 5: Removed javascript handling for the newsletter form as Formspree now handles it.
 
-        const stars = [];
-        const numStars = 1200;
-        const comets = [];
-        const asteroids = [];
+                // Intersection Observer
+                const targets = qsa('section, .hero');
+                const io = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(e => { if (!e.isIntersecting) return; e.target.classList.add('is-visible'); obs.unobserve(e.target); });
+                }, { threshold: .1 });
+                targets.forEach(t => io.observe(t));
 
-        class Star {
-            constructor() {
-                this.reset();
-            }
-
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.z = Math.random() * canvas.width;
-                this.size = Math.random() * 2 + 0.5;
-                this.speed = Math.random() * 2 + 0.5;
-                this.angle = Math.random() * Math.PI * 2;
-                this.color = Math.random() < 0.1 ? `rgba(236, 72, 153, ${1 - this.z / canvas.width})` : `rgba(147, 197, 253, ${1 - this.z / canvas.width})`;
-            }
-
-            update() {
-                this.z -= this.speed * (warpSpeed ? 3 : 1);
-                if (this.z <= 0) {
-                    this.reset();
-                }
-                this.x += Math.cos(this.angle) * 0.5;
-                this.y += Math.sin(this.angle) * 0.5;
-            }
-
-            draw() {
-                const sx = (this.x / this.z) * canvas.width + canvas.width / 2;
-                const sy = (this.y / this.z) * canvas.height + canvas.height / 2;
-                const size = this.size * (canvas.width / this.z);
-
-                ctx.beginPath();
-                ctx.arc(sx, sy, Math.max(size, 0.5), 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-
-                if (Math.random() < 0.05 && !warpSpeed) {
-                    ctx.beginPath();
-                    ctx.arc(sx, sy, Math.max(size * 2, 1), 0, Math.PI * 2);
-                    ctx.fillStyle = this.color.replace('1 - this.z / canvas.width', `${0.3 * (1 - this.z / canvas.width)}`);
-                    ctx.fill();
-                }
-
-                if (warpSpeed) {
-                    const ex = sx - (this.speed * 10 * canvas.width / this.z);
-                    const ey = sy;
-                    ctx.beginPath();
-                    ctx.moveTo(sx, sy);
-                    ctx.lineTo(ex, ey);
-                    ctx.strokeStyle = this.color.replace('1 - this.z / canvas.width', `${0.5 * (1 - this.z / canvas.width)}`);
-                    ctx.lineWidth = Math.max(size, 0.5);
-                    ctx.stroke();
-                }
-            }
-        }
-
-        class Comet {
-            constructor() {
-                this.reset();
-            }
-
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.z = canvas.width;
-                this.speed = Math.random() * 3 + 2;
-                this.angle = Math.random() * Math.PI * 2;
-                this.length = Math.random() * 20 + 10;
-            }
-
-            update() {
-                this.z -= this.speed * (warpSpeed ? 2 : 1);
-                if (this.z <= 0) {
-                    this.reset();
-                }
-                this.x += Math.cos(this.angle) * 2;
-                this.y += Math.sin(this.angle) * 2;
-            }
-
-            draw() {
-                const sx = (this.x / this.z) * canvas.width + canvas.width / 2;
-                const sy = (this.y / this.z) * canvas.height + canvas.height / 2;
-                const ex = sx - Math.cos(this.angle) * this.length;
-                const ey = sy - Math.sin(this.angle) * this.length;
-
-                ctx.beginPath();
-                ctx.moveTo(sx, sy);
-                ctx.lineTo(ex, ey);
-                ctx.strokeStyle = `rgba(56, 189, 248, ${1 - this.z / canvas.width})`;
-                ctx.lineWidth = 2;
-                ctx.stroke();
-            }
-        }
-
-        class Asteroid {
-            constructor() {
-                this.reset();
-            }
-
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.z = canvas.width;
-                this.size = Math.random() * 5 + 3;
-                this.speed = Math.random() * 4 + 2;
-                this.angle = Math.random() * Math.PI * 2;
-                this.rotation = Math.random() * 0.1 - 0.05;
-                this.vertices = this.generateVertices();
-            }
-
-            generateVertices() {
-                const vertices = [];
-                const numVertices = 8;
-                for (let i = 0; i < numVertices; i++) {
-                    const angle = (i / numVertices) * Math.PI * 2;
-                    const radius = this.size * (0.8 + Math.random() * 0.4);
-                    vertices.push({
-                        x: Math.cos(angle) * radius,
-                        y: Math.sin(angle) * radius
+                // Typed headline (respect reduced motion)
+                const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                if (!prefersReduced && window.Typed) {
+                    new Typed('#typed-headline', {
+                        strings: ['Hedge‑Fund Level Analytics.', 'Smarter Trading Decisions.', 'The Future of Intelligent Trading.'],
+                        typeSpeed: 50,
+                        backSpeed: 25,
+                        backDelay: 2000,
+                        loop: true,
+                        smartBackspace: true
                     });
                 }
-                return vertices;
-            }
 
-            update() {
-                this.z -= this.speed * (warpSpeed ? 3 : 1);
-                if (this.z <= 0) {
-                    this.reset();
+                // --- ✨ NEW 3D CARD EFFECT SCRIPT ✨ ---
+                const cards = qsa('.glass-card');
+                if (!prefersReduced) {
+                    cards.forEach(card => {
+                        const ROTATION_FACTOR = 10;
+                        card.addEventListener('mousemove', (e) => {
+                            const rect = card.getBoundingClientRect();
+                            const { width, height } = rect;
+                            const x = e.clientX - rect.left;
+                            const y = e.clientY - rect.top;
+                            const mouseX = x - width / 2;
+                            const mouseY = y - height / 2;
+                            const rotateY = (mouseX / (width / 2)) * ROTATION_FACTOR;
+                            const rotateX = -(mouseY / (height / 2)) * ROTATION_FACTOR;
+
+                            let transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+                            // Apply a more pronounced scale to the .pro plan card
+                            if (card.classList.contains('pro')) {
+                                transform += ' scale3d(1.08, 1.08, 1.08)';
+                            } else {
+                                transform += ' scale3d(1.05, 1.05, 1.05)';
+                            }
+
+                            // Using a CSS variable allows us to also update the hover on .pro.plan
+                            card.style.setProperty('--transform-var', transform);
+                            card.style.transform = transform;
+                            card.style.setProperty('--mouse-x', `${x}px`);
+                            card.style.setProperty('--mouse-y', `${y}px`);
+                        });
+
+                        card.addEventListener('mouseleave', () => {
+                            let defaultTransform = '';
+                            if (card.classList.contains('pro')) {
+                                defaultTransform = 'scale(1.04)'; // Return to its default 'pro' scale
+                            }
+                            card.style.setProperty('--transform-var', defaultTransform);
+                            card.style.transform = defaultTransform;
+                        });
+                    });
                 }
-                this.x += Math.cos(this.angle) * 1.5;
-                this.y += Math.sin(this.angle) * 1.5;
-            }
 
-            draw() {
-                const sx = (this.x / this.z) * canvas.width + canvas.width / 2;
-                const sy = (this.y / this.z) * canvas.height + canvas.height / 2;
-                const scale = canvas.width / this.z;
 
-                ctx.beginPath();
-                for (let i = 0; i < this.vertices.length; i++) {
-                    const vertex = this.vertices[i];
-                    const nextVertex = this.vertices[(i + 1) % this.vertices.length];
-                    ctx.moveTo(sx + vertex.x * scale, sy + vertex.y * scale);
-                    ctx.lineTo(sx + nextVertex.x * scale, sy + nextVertex.y * scale);
+                // Smart nav + progress
+                const nav = qs('nav');
+                const progressBar = qs('#progress-bar');
+                const body = document.body;
+                const sections = qsa('.section-wrapper section, .hero, footer');
+                const navLinks = qsa('nav .nav-links a[data-section]');
+                let lastY = window.scrollY; let ticking = false;
+                const update = () => {
+                    const y = window.scrollY;
+                    if (Math.abs(y - lastY) > 5) { if (lastY < y && y > 100) { nav.classList.add('nav--hidden'); } else { nav.classList.remove('nav--hidden'); } lastY = y; }
+                    nav.classList.toggle('nav--top', y <= 50);
+                    const sh = document.documentElement.scrollHeight - document.documentElement.clientHeight; const p = (y / sh) * 100; progressBar.style.width = `${p}%`;
+                    body.classList.toggle('scrolled', y > window.innerHeight / 2);
+                    let current = '';
+                    sections.forEach(s => { const top = s.offsetTop; if (y >= top - window.innerHeight / 2.5) { current = s.getAttribute('id'); } });
+                    navLinks.forEach(l => { l.classList.toggle('active', l.dataset.section === current); });
+                    ticking = false;
+                };
+                on('scroll', () => { if (!ticking) { requestAnimationFrame(update); ticking = true; } });
+
+                // Hero canvas animation
+                const canvas = qs('#hero-canvas'); const ctx = canvas.getContext('2d', { alpha: true });
+                const setSize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
+                setSize();
+                let particles = [], particleColor = '#0fe63a', lineColor = '#0fa9e6', rafId = null, visible = true;
+                qs('#particleColor').addEventListener('input', e => particleColor = e.target.value);
+                qs('#lineColor').addEventListener('input', e => lineColor = e.target.value);
+
+                class Particle {
+                    constructor(x, y, dx, dy, size) { this.x = x; this.y = y; this.dx = dx; this.dy = dy; this.size = size; }
+                    draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false); ctx.fillStyle = particleColor + '80'; ctx.fill(); }
+                    update(w, h) { if (this.x > w || this.x < 0) this.dx *= -1; if (this.y > h || this.y < 0) this.dy *= -1; this.x += this.dx; this.y += this.dy; this.draw(); }
                 }
-                ctx.closePath();
-                ctx.strokeStyle = `rgba(100, 116, 139, ${warpSpeed ? 1 - this.z / canvas.width : 0.5 * (1 - this.z / canvas.width)})`;
-                ctx.lineWidth = 1;
-                ctx.stroke();
-                ctx.fillStyle = `rgba(71, 85, 105, ${warpSpeed ? 0.7 * (1 - this.z / canvas.width) : 0.3 * (1 - this.z / canvas.width)})`;
-                ctx.fill();
-            }
-        }
-
-        for (let i = 0; i < numStars; i++) {
-            stars.push(new Star());
-        }
-        for (let i = 0; i < 5; i++) {
-            comets.push(new Comet());
-        }
-        for (let i = 0; i < 10; i++) {
-            asteroids.push(new Asteroid());
-        }
-
-        let mouseX = 0;
-        let mouseY = 0;
-
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX - canvas.width / 2;
-            mouseY = e.clientY - canvas.height / 2;
-        });
-
-        warpButton.addEventListener('click', () => {
-            warpSpeed = !warpSpeed;
-            warpButton.textContent = warpSpeed ? 'Disengage Warp' : 'Engage Warp Drive';
-            stars.forEach(star => star.reset());
-            asteroids.forEach(asteroid => asteroid.reset());
-        });
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Consistent nebula background
-            ctx.fillStyle = 'rgba(88, 28, 135, 0.15)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            stars.forEach(star => {
-                star.x += mouseX * 0.00025 * star.z / canvas.width;
-                star.y += mouseY * 0.00025 * star.z / canvas.width;
-                star.update();
-                star.draw();
+                function init() {
+                    particles = []; const area = canvas.width * canvas.height; const target = Math.floor(area / 9000); const count = Math.max(40, Math.min(150, target));
+                    for (let i = 0; i < count; i++) { const size = Math.random() * 2 + 1; const x = Math.random() * (canvas.width - size * 2) + size * 2; const y = Math.random() * (canvas.height - size * 2) + size * 2; const dx = Math.random() * 0.4 - 0.2; const dy = Math.random() * 0.4 - 0.2; particles.push(new Particle(x, y, dx, dy, size)); }
+                }
+                function connect() {
+                    const max = Math.min(canvas.width, canvas.height) / 6; const maxSq = max * max;
+                    for (let i = 0; i < particles.length; i++) {
+                        for (let j = i + 1; j < particles.length; j++) {
+                            const a = particles[i], b = particles[j]; const dx = a.x - b.x, dy = a.y - b.y; const distSq = dx * dx + dy * dy; if (distSq < maxSq) { const alpha = Math.max(0, 1 - distSq / (maxSq * 1.2)); const r = parseInt(lineColor.slice(1, 3), 16), g = parseInt(lineColor.slice(3, 5), 16), bl = parseInt(lineColor.slice(5, 7), 16); ctx.strokeStyle = `rgba(${r},${g},${bl},${alpha})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+                        }
+                    }
+                }
+                function loop() { if (!visible) { rafId = requestAnimationFrame(loop); return; } rafId = requestAnimationFrame(loop); ctx.clearRect(0, 0, canvas.width, canvas.height); const w = canvas.width, h = canvas.height; for (const p of particles) p.update(w, h); connect(); }
+                let resizeTimer; on('resize', () => { cancelAnimationFrame(rafId); clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { setSize(); init(); loop(); }, 150); });
+                document.addEventListener('visibilitychange', () => { visible = document.visibilityState === 'visible'; });
+                init(); loop();
             });
+        })();
+    </script>
 
-            comets.forEach(comet => {
-                comet.update();
-                comet.draw();
-            });
-
-            asteroids.forEach(asteroid => {
-                asteroid.update();
-                asteroid.draw();
-            });
-
-            requestAnimationFrame(animate);
-        }
-
-        animate();
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Organization","name":"OptiTrade AI","url":"https://optitrade.ai","logo":"https://optitrade.ai/logo.png","sameAs":[]}
     </script>
 </body>
+
 </html>
