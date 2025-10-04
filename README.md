@@ -62,37 +62,41 @@ Large Language Models analyze 100 days of news + technical state:
 
 ### The Pipeline (Minutes, Not Hours)
 
-```
-Market Close (4:00 PM EST)
-         ↓
-[1] Data Ingestion
-    • Polygon.io: Price, volume, Greeks
-    • Yahoo Finance: News articles
-    • Batch processing: 3,800+ tickers concurrently (entire VTI holdings)
-         ↓
-[2] Technical Filtering
-    • RSI extremes (oversold/overbought)
-    • Bollinger Band positioning
-    • EMA alignment/crossovers
-    • Volume confirmation
-         ↓
-[3] Options Analysis
-    • Greeks screening (delta, IV, OI)
-    • Probability calculations
-    • ROR/ROC metrics
-    • Spread optimization
-         ↓
-[4] AI Enhancement
-    • News sentiment aggregation
-    • Contextual analysis by Claude
-    • Conviction scoring
-         ↓
-[5] Delivery
-    • Discord: Formatted alerts
-    • Dashboards: Interactive Streamlit apps
-    • API: JSON responses
-    • Files: Timestamped results + history
-```
+**Market Close (4:00 PM EST)** → Analysis Complete
+
+#### 1. 📊 Data Ingestion
+Parallel data collection from multiple sources:
+- **Polygon.io**: Price, volume, Greeks, options chains
+- **Yahoo Finance**: News articles and sentiment signals
+- **Scale**: 3,800+ tickers concurrently (entire VTI holdings)
+
+#### 2. 🔍 Technical Filtering
+Multi-indicator confluence screening:
+- RSI extremes (oversold/overbought conditions)
+- Bollinger Band positioning (squeeze/expansion)
+- EMA alignment and crossovers (20/50/100-day)
+- Volume confirmation and anomaly detection
+
+#### 3. 📈 Options Analysis
+Greeks-based opportunity discovery:
+- Delta, IV, and open interest screening
+- Probability of profit calculations
+- Return on Risk (ROR) and Return on Collateral (ROC) metrics
+- Spread optimization and strike selection
+
+#### 4. 🤖 AI Enhancement
+LLM-powered contextual analysis:
+- News sentiment aggregation (100-day lookback)
+- Claude generates bull/bear thesis with conviction levels
+- Catalyst identification (earnings, regulatory, macro)
+- Risk/reward narrative synthesis
+
+#### 5. 🚀 Delivery
+Multi-channel distribution:
+- **Discord**: Formatted alerts with actionable insights
+- **Dashboards**: Interactive Streamlit apps for filtering
+- **API**: JSON responses for programmatic access
+- **Files**: Timestamped results with historical tracking
 
 ### What Makes It Fast
 
