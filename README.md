@@ -16,7 +16,7 @@ We don't predict the future. We **identify mathematical edges** using probabilit
 
 **Options trading demands speed, precision, and data synthesis:**
 
-- Scanning 2,000+ tickers daily for technical setups is humanly impossible
+- Scanning 3,800+ tickers daily for technical setups is humanly impossible
 - Manual Bollinger Band + RSI + IV analysis across multiple timeframes takes hours
 - News sentiment shifts happen faster than you can read headlines
 - Identifying high-probability income trades (CSPs/PCS) requires complex Greeks calculations
