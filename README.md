@@ -16,7 +16,7 @@ We don't predict the future. We **identify mathematical edges** using probabilit
 
 **Options trading demands speed, precision, and data synthesis:**
 
-- Scanning 3,500+ tickers daily for technical setups is humanly impossible
+- Scanning 2,000+ tickers daily for technical setups is humanly impossible
 - Manual Bollinger Band + RSI + IV analysis across multiple timeframes takes hours
 - News sentiment shifts happen faster than you can read headlines
 - Identifying high-probability income trades (CSPs/PCS) requires complex Greeks calculations
@@ -35,7 +35,7 @@ We don't predict the future. We **identify mathematical edges** using probabilit
 ### Three Core Engines
 
 **1. Technical Analysis Engine**
-Processes 1,000+ tickers in 90 seconds using concurrent async operations:
+Processes thousands of tickers quickly using concurrent async operations:
 - RSI divergence detection (14-period standard)
 - Bollinger Band squeeze/expansion tracking (20-day, 2σ)
 - MACD histogram momentum shifts
@@ -60,29 +60,29 @@ Claude Sonnet 4 analyzes 75 days of news + technical state:
 
 ## How It Works
 
-### The Pipeline (Under 2 Minutes End-to-End)
+### The Pipeline (Minutes, Not Hours)
 
 ```
 Market Close (4:00 PM EST)
          ↓
-[1] Data Ingestion (30 sec)
+[1] Data Ingestion
     • Polygon.io: Price, volume, Greeks
     • Yahoo Finance: News articles
-    • Batch processing: 2,000 tickers concurrently
+    • Batch processing: 3,800+ tickers concurrently (entire VTI holdings)
          ↓
-[2] Technical Filtering (45 sec)
+[2] Technical Filtering
     • RSI extremes (oversold/overbought)
     • Bollinger Band positioning
     • EMA alignment/crossovers
     • Volume confirmation
          ↓
-[3] Options Analysis (30 sec)
+[3] Options Analysis
     • Greeks screening (delta, IV, OI)
     • Probability calculations
     • ROR/ROC metrics
     • Spread optimization
          ↓
-[4] AI Enhancement (15 sec)
+[4] AI Enhancement
     • News sentiment aggregation
     • Contextual analysis by Claude
     • Conviction scoring
@@ -96,10 +96,10 @@ Market Close (4:00 PM EST)
 
 ### What Makes It Fast
 
-- **Async/Await**: Parallel API calls via `asyncio.gather()` → 5-10x speedup
+- **Async/Await**: Parallel API calls via `asyncio.gather()` for massive speedup
 - **Smart Caching**: Redis layer for repeated lookups (disabled by default, easily toggled)
-- **Batch Processing**: Groups of 50 tickers processed concurrently with semaphores
-- **Early Filtering**: Volume > 1M filter before expensive options chain lookups
+- **Batch Processing**: Groups of tickers processed concurrently with semaphores
+- **Early Filtering**: Volume thresholds before expensive options chain lookups
 
 ---
 
@@ -296,17 +296,16 @@ We **do** provide:
 ### Performance Metrics
 
 ```
-Benchmark: 1,000 ticker scan (full technical analysis)
+Async Concurrency Benefits:
 ────────────────────────────────────────────────────
-Sequential execution:        420 seconds
-Parallel (asyncio.gather): 62 seconds (6.8x faster)
-With Redis caching:           8 seconds (52x faster)
+Sequential processing:     Slow (hours for 3,800+ tickers)
+Parallel (asyncio.gather): Fast (minutes for entire VTI holdings)
 
-API Response Times:
-────────────────────────────────────────────────────
-Single ticker analysis:      ~400ms
-10 tickers (parallel):       ~800ms
-100 tickers (batched):       ~6.5 seconds
+Speedup achieved through:
+• Concurrent API calls via asyncio.gather()
+• Batch processing with semaphores
+• Smart filtering to reduce API calls
+• Optional Redis caching layer
 ```
 
 ### Code Quality
