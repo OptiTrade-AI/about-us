@@ -50,7 +50,7 @@ Automated Greeks-based opportunity discovery:
 - Real-time open interest and liquidity filtering
 
 **3. AI Sentiment Synthesis**
-Claude Sonnet 4 analyzes 75 days of news + technical state:
+Large Language Models analyze 100 days of news + technical state:
 - Contextual sentiment scoring (not just positive/negative)
 - Bull/bear thesis generation with conviction levels
 - Catalyst identification (earnings, regulatory, macro events)
