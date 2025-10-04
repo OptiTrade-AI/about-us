@@ -62,41 +62,58 @@ Large Language Models analyze 100 days of news + technical state:
 
 ### The Pipeline (Minutes, Not Hours)
 
-**Market Close (4:00 PM EST)** → Analysis Complete
+```mermaid
+graph TB
+    Start[🔔 Market Close<br/>4:00 PM EST] --> Ingest[📊 Data Ingestion<br/>3,800+ tickers]
 
-#### 1. 📊 Data Ingestion
-Parallel data collection from multiple sources:
-- **Polygon.io**: Price, volume, Greeks, options chains
-- **Yahoo Finance**: News articles and sentiment signals
-- **Scale**: 3,800+ tickers concurrently (entire VTI holdings)
+    Ingest --> |Polygon.io| Price[Price, Volume, Greeks]
+    Ingest --> |Yahoo Finance| News[News & Sentiment]
 
-#### 2. 🔍 Technical Filtering
-Multi-indicator confluence screening:
-- RSI extremes (oversold/overbought conditions)
-- Bollinger Band positioning (squeeze/expansion)
-- EMA alignment and crossovers (20/50/100-day)
-- Volume confirmation and anomaly detection
+    Price --> Filter[🔍 Technical Filtering]
+    News --> Filter
 
-#### 3. 📈 Options Analysis
-Greeks-based opportunity discovery:
-- Delta, IV, and open interest screening
-- Probability of profit calculations
-- Return on Risk (ROR) and Return on Collateral (ROC) metrics
-- Spread optimization and strike selection
+    Filter --> |RSI Extremes| Filter1[Oversold/Overbought]
+    Filter --> |Bollinger Bands| Filter2[Squeeze/Expansion]
+    Filter --> |EMA Cross| Filter3[20/50/100 Day]
+    Filter --> |Volume| Filter4[Anomaly Detection]
 
-#### 4. 🤖 AI Enhancement
-LLM-powered contextual analysis:
-- News sentiment aggregation (100-day lookback)
-- Claude generates bull/bear thesis with conviction levels
-- Catalyst identification (earnings, regulatory, macro)
-- Risk/reward narrative synthesis
+    Filter1 --> Options[📈 Options Analysis]
+    Filter2 --> Options
+    Filter3 --> Options
+    Filter4 --> Options
 
-#### 5. 🚀 Delivery
-Multi-channel distribution:
-- **Discord**: Formatted alerts with actionable insights
-- **Dashboards**: Interactive Streamlit apps for filtering
-- **API**: JSON responses for programmatic access
-- **Files**: Timestamped results with historical tracking
+    Options --> |Greeks| Greeks[Delta, IV, OI Screen]
+    Options --> |Metrics| Metrics[ROR/ROC Calculations]
+    Options --> |Probability| Prob[Profit Probability]
+
+    Greeks --> AI[🤖 AI Enhancement]
+    Metrics --> AI
+    Prob --> AI
+    News --> AI
+
+    AI --> |Claude Sonnet| Analysis[Bull/Bear Thesis]
+    AI --> |Sentiment| Catalyst[Catalyst ID]
+
+    Analysis --> Deliver[🚀 Multi-Channel Delivery]
+    Catalyst --> Deliver
+
+    Deliver --> Discord[💬 Discord Alerts]
+    Deliver --> Dashboard[📊 Streamlit Dashboards]
+    Deliver --> API[🔌 REST API]
+    Deliver --> Files[📁 Timestamped JSON]
+
+    style Start fill:#4CAF50,stroke:#2E7D32,color:#fff
+    style Deliver fill:#2196F3,stroke:#1565C0,color:#fff
+    style AI fill:#FF9800,stroke:#E65100,color:#fff
+    style Options fill:#9C27B0,stroke:#6A1B9A,color:#fff
+    style Filter fill:#00BCD4,stroke:#006064,color:#fff
+```
+
+**Key Performance Factors:**
+- ⚡ **Async Concurrency**: Parallel processing of all tickers
+- 🎯 **Smart Filtering**: Volume/liquidity checks before expensive API calls
+- 💾 **Optional Caching**: Redis layer for repeated queries
+- 🔄 **Batch Processing**: Semaphore-controlled rate limiting
 
 ### What Makes It Fast
 
@@ -109,160 +126,253 @@ Multi-channel distribution:
 
 ## Real Output Examples
 
-### Cash-Secured Put Opportunity
+### 💰 Cash-Secured Put Opportunity
+
+<table>
+<tr><td colspan="2">
+
+**TICKER: HOOD** | $28.50 | RSI: 42 (Neutral) | 15% below 50-day SMA
+
+</td></tr>
+<tr>
+<td width="50%">
+
+**📊 Options Chain**
+- **Strike**: $27.00
+- **DTE**: 28 days
+- **Premium**: $1.15/share ($115 per contract)
+- **Delta**: -0.32
+- **IV**: 68%
+- **Open Interest**: 842 contracts
+
+</td>
+<td width="50%">
+
+**💵 Financial Metrics**
+- **Return on Risk**: 4.44% (58% annualized)
+- **Break-Even**: $25.85 (9.3% cushion)
+- **Probability of Profit**: ~68%
+- **Cash Collateral**: $2,700
+- **Max Loss**: $2,585
+
+</td>
+</tr>
+<tr><td colspan="2">
+
+**🔍 Technical Context**
+
+✅ Price between SMA and lower BB (oversold setup)
+✅ High IV environment (premium expansion)
+✅ Liquid options chain (easy exits)
+⚠️  Earnings in 35 days (after expiration)
+
+**VERDICT: 🟢 HIGH-CONFIDENCE OPPORTUNITY**
+
+</td></tr>
+</table>
+
+### 🔥 Aggressive Call Signal
+
+<table>
+<tr><td>
+
+**TICKER: NVDA** | $118.20 | **STATUS: EXTREME OVERSOLD** ⚠️
+
+</td></tr>
+<tr><td>
+
+**📉 Technical Triggers**
+
+| Indicator | Value | Signal |
+|-----------|-------|--------|
+| **RSI** | 24 | 🔴 Extreme fear |
+| **Price vs BB** | $4.80 below lower band | 🔴 2.2σ deviation |
+| **Volume** | 185M | 🟡 240% of 30-day avg |
+| **EMA Trend** | 20 EMA < 50 EMA | 🔴 Short-term weakness |
+
+</td></tr>
+<tr><td>
+
+**💡 Trade Setup**
+
+**Play**: Buy $120 calls expiring in 14-21 days
+
+**Reasoning**: Mean reversion likely at this RSI extreme. Historical bounce rate at RSI <25 for NVDA = 78% within 5 days. Volume spike suggests capitulation. Avoid weeklies due to theta decay.
+
+**Confidence**: 🟡 MEDIUM (needs follow-through volume on day 2)
+
+</td></tr>
+<tr><td>
+
+**🤖 AI Analysis (Claude Sonnet 4)**
+
+> "Recent news highlights supply chain concerns and analyst downgrade, but fundamentals remain strong. Oversold condition appears technical vs. fundamental shift. Historical pattern shows RSI <25 preceded +8-12% rallies in 6 of last 7 occurrences."
+
+</td></tr>
+</table>
+
+### 📈 Swing Trade Signal
+
+<table>
+<tr><td colspan="2">
+
+**TICKER: PLTR** | $42.15 | **Signal: 🟢 LONG** | Strategy: Golden Cross Setup
+
+</td></tr>
+<tr>
+<td width="50%">
+
+**📊 EMA Alignment**
 
 ```
-TICKER: HOOD | $28.50 | RSI: 42 (Neutral) | 15% below 50-day SMA
-
-OPTIONS CHAIN:
-  Strike: $27.00 | DTE: 28 days | Premium: $1.15
-  Delta: -0.32 | IV: 68% | Open Interest: 842 contracts
-
-METRICS:
-  Return on Risk: 4.44% (58% annualized)
-  Break-Even: $25.85 (9.3% downside cushion)
-  Probability of Profit: ~68% (based on delta)
-  Cash Collateral: $2,700 | Max Loss: $2,585
-
-TECHNICAL CONTEXT:
-  ✅ Price between SMA and lower BB (oversold setup)
-  ✅ High IV environment (premium expansion)
-  ✅ Liquid options chain (easy exits)
-  ⚠️  Earnings in 35 days (after expiration)
-
-VERDICT: HIGH-CONFIDENCE OPPORTUNITY
+Price:   $42.15 ▲
+         ├─ 20 EMA:  $41.80 (bullish)
+         ├─ 50 EMA:  $40.50 (crossed above ✓)
+         └─ 100 EMA: $38.20 (support)
 ```
 
-### Aggressive Call Signal
+**All EMAs rising → Strong uptrend**
 
-```
-TICKER: NVDA | $118.20
-STATUS: EXTREME OVERSOLD
+</td>
+<td width="50%">
 
-TECHNICAL TRIGGERS:
-  • RSI: 24 (extreme fear)
-  • Price: $4.80 below lower Bollinger Band (2.2σ)
-  • Volume: 185M (240% of 30-day average)
-  • 20 EMA < 50 EMA (short-term weakness)
+**🎯 Trade Levels**
 
-PLAY: Buy $120 calls expiring in 14-21 days
-REASONING: Mean reversion likely at this RSI extreme. Historical
-bounce rate at RSI <25 for NVDA = 78% within 5 days. Volume
-spike suggests capitulation. Avoid weeklies due to theta decay.
+| Level | Price | Risk/Reward |
+|-------|-------|-------------|
+| **Entry** | $42.00-$42.50 | - |
+| **Stop** | $39.80 | (below 50 EMA) |
+| **Target 1** | $45.50 | 2:1 R/R |
+| **Target 2** | $48.00 | 3:1 R/R |
 
-CONFIDENCE: MEDIUM (needs follow-through volume on day 2)
+</td>
+</tr>
+<tr><td colspan="2">
 
-AI TAKE (Claude Sonnet 4):
-"Recent news highlights supply chain concerns and analyst
-downgrade, but fundamentals remain strong. Oversold condition
-appears technical vs. fundamental shift. Historical pattern shows
-RSI <25 preceded +8-12% rallies in 6 of last 7 occurrences."
-```
+**🔍 Confirmation Signals**
 
-### Swing Trade Signal
+✅ 20 EMA crossed 50 EMA 3 days ago (momentum established)
+✅ Volume on breakout: 142M (180% of average - institutional interest)
+✅ All EMAs rising (trend strength confirmation)
+✅ Price consolidating above 20 EMA (healthy pullback)
 
-```
-TICKER: PLTR | $42.15 | Signal: LONG
-STRATEGY: Golden Cross Setup
+**Confidence**: 🟢 HIGH
 
-EMA ALIGNMENT:
-  • 20 EMA: $41.80 (price above - bullish)
-  • 50 EMA: $40.50 (recently crossed above)
-  • 100 EMA: $38.20 (strong uptrend support)
+**Reasoning**: Classic golden cross setup with strong momentum confirmation. Volume surge validates institutional interest. Risk well-defined at 50 EMA support.
 
-ENTRY: $42.00-$42.50 zone
-STOP: $39.80 (below 50 EMA)
-TARGET 1: $45.50 (R/R = 2:1)
-TARGET 2: $48.00 (R/R = 3:1)
-
-CONFIDENCE: HIGH
-  ✅ 20 EMA crossed 50 EMA 3 days ago
-  ✅ Volume on breakout: 142M (180% avg)
-  ✅ All EMAs rising (trend strength)
-  ✅ Price consolidating above 20 EMA
-
-REASONING: Classic golden cross setup with strong momentum
-confirmation. Volume surge validates institutional interest. Risk
-well-defined at 50 EMA support.
-```
+</td></tr>
+</table>
 
 ---
 
 ## Who This Is For
 
-### Income-Focused Options Sellers
+<table>
+<tr>
+<td width="50%">
+
+### 💰 Income-Focused Options Sellers
+
 *"I want 3-5% monthly returns selling premium."*
-- **Use Case**: Run CSP/PCS screeners weekly
-- **What You Get**: Pre-filtered high-probability trades with defined risk
-- **Why It Works**: Greeks + technical + liquidity = edge
-- **Time Saved**: 90% (from manual chain scanning)
 
-### Momentum/Swing Traders
-*"I trade EMA crossovers but can't scan 1,000 stocks daily."*
-- **Use Case**: Daily swing signal alerts at market close
-- **What You Get**: LONG/SHORT setups with entry/stop/target prices
-- **Why It Works**: Multi-timeframe EMA confluence + volume confirmation
-- **Edge**: Catch crossovers within 24 hours vs. discovering them 3 days late
+**Use Case**: Weekly CSP/PCS screeners
+**What You Get**: Pre-filtered trades with defined risk
+**Edge**: Greeks + technical + liquidity filters
+**Time Saved**: 90% vs. manual scanning
 
-### Aggressive Short-Term Traders
+---
+
+### 🎯 Momentum/Swing Traders
+
+*"I trade EMA crossovers but can't scan thousands of stocks daily."*
+
+**Use Case**: Daily swing signal alerts at close
+**What You Get**: LONG/SHORT setups with R/R levels
+**Edge**: Multi-timeframe confluence + volume
+**Advantage**: Catch setups within 24hrs vs. 3 days late
+
+</td>
+<td width="50%">
+
+### ⚡ Aggressive Short-Term Traders
+
 *"I scalp extreme RSI reversals on high IV tickers."*
-- **Use Case**: Post-market aggressive options pipeline
-- **What You Get**: RSI <20 (calls) or >70 (puts) with BB confirmation
-- **Why It Works**: Mean reversion at statistical extremes
-- **Warning**: 35% win rate, but 3:1 R/R with discipline
 
-### Quantitative Developers
+**Use Case**: Post-market aggressive options pipeline
+**What You Get**: RSI <20 calls / >70 puts + BB confirm
+**Edge**: Mean reversion at statistical extremes
+**Reality Check**: 35% win rate, 3:1 R/R needs discipline
+
+---
+
+### 🔬 Quantitative Developers
+
 *"I need clean data + APIs to build custom strategies."*
-- **Use Case**: FastAPI endpoints for programmatic access
-- **What You Get**: JSON responses with technical indicators + Greeks
-- **Why It's Better**: Async Python, Pydantic validation, OpenAPI docs
-- **Extend It**: White-label the platform, add ML models, build bots
+
+**Use Case**: FastAPI endpoints for programmatic access
+**What You Get**: JSON with indicators + Greeks
+**Tech**: Async Python, Pydantic, OpenAPI docs
+**Build**: White-label, ML models, trade bots
+
+</td>
+</tr>
+</table>
 
 ---
 
 ## Why We're Different
 
-### Transparency Over Mystery
+<table>
+<tr>
+<td width="33%">
 
-**Most platforms:**
-- Proprietary "AI scores" with no methodology
-- Black-box algorithms you can't audit
-- Claims without backtests
+### 🔍 Transparency Over Mystery
+
+**Most Platforms:**
+- ❌ Proprietary "AI scores"
+- ❌ Black-box algorithms
+- ❌ Claims without backtests
 
 **OptiTrade AI:**
-- Open-source core (BSL 1.1 license)
-- Every calculation explained in code
-- Historical JSON files for your own backtesting
-- No magic—just math and execution
+- ✅ Open-source core (BSL 1.1)
+- ✅ Every calculation visible
+- ✅ Historical JSON exports
+- ✅ No magic—just math
 
-### Precision Over Hype
+</td>
+<td width="33%">
 
-We **don't** promise:
-- "95% win rates"
-- "Triple your account in 30 days"
-- "Never lose again"
+### 🎯 Precision Over Hype
 
-We **do** provide:
-- Statistical edges (not certainties)
-- Risk/reward transparency
-- Tools to execute your thesis
-- Data to learn and improve
+**We DON'T Promise:**
+- ❌ "95% win rates"
+- ❌ "Triple your account"
+- ❌ "Never lose again"
 
-### Production-Grade Engineering
+**We DO Provide:**
+- ✅ Statistical edges
+- ✅ Risk/reward clarity
+- ✅ Execution tools
+- ✅ Learning data
 
-**Not a weekend project:**
-- FastAPI + Pydantic (type safety, validation)
-- Async concurrency (10x performance)
-- Docker deployments (reproducibility)
-- Comprehensive error handling
-- Rate limiting for API quotas
-- Structured logging
+</td>
+<td width="33%">
 
-**Built by engineers who trade:**
-- Experienced with real P&L pain
-- Obsessed with data quality
-- Value speed + reliability
-- Ship features that matter
+### ⚙️ Production-Grade Code
+
+**Not a Weekend Project:**
+- ✅ FastAPI + Pydantic
+- ✅ Async concurrency
+- ✅ Docker deployments
+- ✅ Error handling
+- ✅ Rate limiting
+- ✅ Structured logging
+
+**Built by traders who code**
+
+</td>
+</tr>
+</table>
 
 ---
 
