@@ -1,8 +1,5 @@
 # OptiTrade AI
-
-> **Smart options analysis that actually works.** We scan 3,800+ stocks daily, identify high-probability setups, and deliver them before market open.
-
----
+> **Smart options analysis that actually works.** We scan 3,800+ stocks daily, identify high-probability setups
 
 ## What We Are
 
