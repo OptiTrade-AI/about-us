@@ -82,19 +82,8 @@ graph TD
 *Generate income while potentially buying stock at a discount*
 
 #### Visual P&L Profile
-```
-Profit ↑
-      │    ═══════════════════════► Premium Kept ($200)
-  $200├────┐
-      │    │
-    $0├────┼────────────────────────► Stock Price
-      │    │ ← Breakeven ($43)
- -$300├────┘
-      │
-      └────┴────┴────┴────┴────┴────
-          $40  $43  $45  $48  $50
-               BE  Strike
-```
+<img width="1196" height="764" alt="image" src="https://github.com/user-attachments/assets/de1480de-2d84-4a9a-83de-fcde550f804c" />
+
 
 #### **Real Example Trade**
 ```
@@ -125,21 +114,8 @@ Profit ↑
 *Turn your stock holdings into an income machine*
 
 #### Visual P&L Profile
-```
-Profit ↑         ═══════════════► Capped at $650
-      │       ╱
-  $650├──────┘   
-      │     ╱ ← Stock + Premium  
-  $150├────┘  
-      │   ╱
-    $0├──┴──────────────────────► Stock Price
-      │ ╱
- -$500├┘ ← Downside (offset by premium)
-      │
-      └────┴────┴────┴────┴────┴
-          $45  $48  $50  $55  $60
-               BE  Cost Strike
-```
+<img width="1080" height="1080" alt="image" src="https://github.com/user-attachments/assets/b609fd68-b7cc-4b4c-a876-1befe847c8b5" />
+
 
 #### **Monthly Income Calculator**
 | Shares Owned | Strike Above Cost | Premium/Month | Annual Income |
