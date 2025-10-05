@@ -1,8 +1,6 @@
 # 📊 OptiTrade AI
 ## Master Core Options Trading Strategies
 
----
-
 ## Cash-Secured Puts 🎯
 
 ### Strategy Overview
