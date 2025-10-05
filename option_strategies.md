@@ -36,11 +36,11 @@ Defined risk with clear profit targets
 ### 🔮 Advanced Strategies
 Complex multi-leg positions for experienced traders
 
-| Strategy | **Iron Condor** | **Butterfly** | **Straddle** | **Strangle** | **Calendar Spread** |
-|:---------|:---------------|:--------------|:-------------|:-------------|:-------------------|
-| **🎭 Complexity** | High (4 legs) | High (3 legs) | Medium (2 legs) | Medium (2 legs) | Medium (2 legs) |
-| **📐 Shape** | Range profit | Peak profit | V-shaped | V-shaped (wider) | Time-based |
-| **💎 Ideal For** | Low volatility | Precision target | Big moves | Bigger moves | Theta harvest |
+| Strategy | **Iron Condor** | **Butterfly** | **Straddle** | **Strangle** | **Calendar Spread** | **Put Ratio Spread** |
+|:---------|:---------------|:--------------|:-------------|:-------------|:-------------------|:---------------------|
+| **🎭 Complexity** | High (4 legs) | High (3 legs) | Medium (2 legs) | Medium (2 legs) | Medium (2 legs) | Medium (3 legs) |
+| **📐 Shape** | Range profit | Peak profit | V-shaped | V-shaped (wider) | Time-based | Peak + unlimited risk |
+| **💎 Ideal For** | Low volatility | Precision target | Big moves | Bigger moves | Theta harvest | Modest decline expected |
 
 ---
 
@@ -222,6 +222,8 @@ Q4 2024    ±7%             +2% 😐         -$500 loss
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
+---
+
 ### **Butterfly Spread** 🦋
 *Low-cost, high-reward precision play*
 
@@ -242,6 +244,111 @@ Q4 2024    ±7%             +2% 😐         -$500 loss
           $45 $47.5 $50 $52.5 $55
           
     Wings: Buy $45 & $55    Body: Sell 2× $50
+```
+
+---
+
+### **Put Ratio Spread** ⚖️
+*Credit strategy for modest bearish outlook - HIGH RISK!*
+
+#### **What Is a Put Ratio Spread?**
+A put ratio spread involves buying one put option at a higher strike and selling multiple (typically 2) put options at a lower strike. This creates a net credit position where you profit most if the stock lands exactly at the lower strike at expiration. However, it comes with **unlimited downside risk** below the lower breakeven point.
+
+**Think of it as:** Betting the stock will decline moderately, but not crash
+
+#### The Setup Visualized
+```
+     BUY 1 PUT        SELL 2 PUTS
+        ↓                ↓↓
+    ┌────────┐        ┌────────┐
+    │ $50    │        │ $45    │
+    │ -$4.00 │        │ +$3.00 │
+    └────────┘        └────────┘
+         ╲              ╱╱
+          ╲            ╱╱
+           ╲          ╱╱
+         Net Credit: $2.00
+         Max Profit: $7.00 (at $45)
+         ⚠️ Max Risk: UNLIMITED below $38
+```
+
+#### **Real Example Trade**
+```
+📊 Stock Trading at $52
+━━━━━━━━━━━━━━━━━━━━━
+✅ BUY 1 Put @ $50 strike: -$4.00
+✍️ SELL 2 Puts @ $45 strike: +$3.00 each
+💵 Net Credit: $2.00 ($200)
+📍 Max Profit: $7.00 at $45 ($700)
+📍 Upper Breakeven: $48
+📍 Lower Breakeven: $38
+⚠️ Risk Below $38: UNLIMITED
+━━━━━━━━━━━━━━━━━━━━━
+```
+
+#### **Profit Zone Map**
+```
+Stock Price:  $35    $38    $43    $45    $48    $50    $52    $55
+              │      │      │      │      │      │      │      │
+P&L:       -$300    $0   +$600  +$700  +$200    $0   +$200  +$200
+              ▼      ▼      ▼      ▼      ▼      ▼      ▼      ▼
+Status:    [LOSS] [B.E.] [PROFIT] [MAX] [PROFIT] [B.E.] [PROFIT]
+Risk:     UNLIMITED ← → → CAPPED PROFIT → ← → CREDIT KEPT
+
+⚠️ WARNING: Losses accelerate below lower breakeven!
+```
+
+#### **Three Possible Outcomes:**
+1. **Stock stays above $48** → Keep some/all credit ✅
+2. **Stock falls to $38-48** → Maximum profit zone 🎯
+3. **Stock crashes below $38** → Unlimited losses! 🚨
+
+#### **🎯 When To Use**
+- ✅ Expect modest decline (5-10%)
+- ✅ Stock has strong support level (at lower strike)
+- ✅ High IV environment for better credits
+- ✅ Confident stock won't crash through support
+
+#### **⚠️ Critical Warnings**
+- 🔴 **UNLIMITED DOWNSIDE RISK** - This is NOT a beginner strategy
+- 🔴 Naked short put exposure (2 sold, only 1 bought)
+- 🔴 Requires significant margin/buying power
+- 🔴 Can result in catastrophic losses in crash scenarios
+- 🔴 Assignment risk on short puts if deep ITM
+- 🔴 Avoid during earnings or major news events
+
+#### **🛡️ Risk Management for Ratio Spreads**
+```
+Position Sizing:     Use TINY positions (max 0.5-1% account risk)
+Stop Loss:          Close entire spread if stock breaks lower strike
+Max Positions:      Limit to 1-2 ratio spreads maximum
+Support Levels:     Only trade above very strong technical support
+Avoid Before:       Earnings, Fed meetings, major news, high uncertainty
+Monitor Daily:      Check position at least once per day
+Have Exit Plan:     Know exactly when you'll close (don't hope!)
+```
+
+#### **Why This Strategy Is Dangerous**
+```
+Scenario: Market Crash
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Your Position: Put Ratio Spread on Stock at $52
+- Buy 1x $50 Put
+- Sell 2x $45 Puts
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Stock crashes to $30 (-42%)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Long Put Profit:  $50 - $30 = $20 → +$2,000
+Short Puts Loss:  2 × ($45 - $30) = $30 → -$3,000
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Net Loss: -$1,000 (on $200 credit received!)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Stock crashes to $20 (-62%)
+Net Loss: -$3,000 (15× your credit!)
+
+Stock crashes to $10 (-81%)
+Net Loss: -$5,000 (25× your credit!)
 ```
 
 ---
@@ -361,4 +468,4 @@ Remember:
 
 *📊 OptiTrade AI - Your Intelligent Options Trading Companion*
 
-*Last Updated: October 2025 | Version 2.0 Enhanced*
+*Last Updated: October 2025 | Version 2.1 Enhanced with Put Ratio Spread*
