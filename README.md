@@ -126,142 +126,84 @@ graph TB
 
 ## Real Output Examples
 
-### 💰 Cash-Secured Put Opportunity
+### Cash-Secured Put Opportunity
 
-<table>
-<tr><td colspan="2">
+```
+TICKER: HOOD | Price: $28.50 | RSI: 42 (Neutral) | 15% below 50-day SMA
+```
 
-**TICKER: HOOD** | $28.50 | RSI: 42 (Neutral) | 15% below 50-day SMA
+**Options Setup**
+- Strike: $27.00
+- Days to Expiration: 28
+- Premium: $1.15/share ($115 per contract)
+- Delta: -0.32 | IV: 68% | Open Interest: 842
 
-</td></tr>
-<tr>
-<td width="50%">
+**Financial Metrics**
+- Return on Risk: 4.44% (58% annualized)
+- Break-Even: $25.85 (9.3% cushion)
+- Probability of Profit: ~68%
+- Collateral Required: $2,700
+- Max Loss: $2,585
 
-**📊 Options Chain**
-- **Strike**: $27.00
-- **DTE**: 28 days
-- **Premium**: $1.15/share ($115 per contract)
-- **Delta**: -0.32
-- **IV**: 68%
-- **Open Interest**: 842 contracts
+**Technical Assessment**
+- ✅ Oversold setup (price between SMA and lower BB)
+- ✅ High IV environment (premium expansion)
+- ✅ Liquid options chain (easy exits)
+- ⚠️ Earnings in 35 days (after expiration)
 
-</td>
-<td width="50%">
+**Verdict: HIGH-CONFIDENCE OPPORTUNITY**
 
-**💵 Financial Metrics**
-- **Return on Risk**: 4.44% (58% annualized)
-- **Break-Even**: $25.85 (9.3% cushion)
-- **Probability of Profit**: ~68%
-- **Cash Collateral**: $2,700
-- **Max Loss**: $2,585
+### Aggressive Call Signal
 
-</td>
-</tr>
-<tr><td colspan="2">
+```
+TICKER: NVDA | Price: $118.20 | STATUS: EXTREME OVERSOLD
+```
 
-**🔍 Technical Context**
+**Technical Triggers**
+- RSI: 24 (extreme fear)
+- Price vs Bollinger Band: $4.80 below lower band (2.2σ deviation)
+- Volume: 185M (240% of 30-day average)
+- EMA Trend: 20 EMA < 50 EMA (short-term weakness)
 
-✅ Price between SMA and lower BB (oversold setup)
-✅ High IV environment (premium expansion)
-✅ Liquid options chain (easy exits)
-⚠️  Earnings in 35 days (after expiration)
+**Trade Setup**
+- Play: Buy $120 calls, 14-21 DTE
+- Reasoning: Mean reversion at RSI extreme. Historical bounce rate 78% within 5 days at RSI <25. Volume spike suggests capitulation.
+- Confidence: MEDIUM (needs follow-through volume)
 
-**VERDICT: 🟢 HIGH-CONFIDENCE OPPORTUNITY**
-
-</td></tr>
-</table>
-
-### 🔥 Aggressive Call Signal
-
-<table>
-<tr><td>
-
-**TICKER: NVDA** | $118.20 | **STATUS: EXTREME OVERSOLD** ⚠️
-
-</td></tr>
-<tr><td>
-
-**📉 Technical Triggers**
-
-| Indicator | Value | Signal |
-|-----------|-------|--------|
-| **RSI** | 24 | 🔴 Extreme fear |
-| **Price vs BB** | $4.80 below lower band | 🔴 2.2σ deviation |
-| **Volume** | 185M | 🟡 240% of 30-day avg |
-| **EMA Trend** | 20 EMA < 50 EMA | 🔴 Short-term weakness |
-
-</td></tr>
-<tr><td>
-
-**💡 Trade Setup**
-
-**Play**: Buy $120 calls expiring in 14-21 days
-
-**Reasoning**: Mean reversion likely at this RSI extreme. Historical bounce rate at RSI <25 for NVDA = 78% within 5 days. Volume spike suggests capitulation. Avoid weeklies due to theta decay.
-
-**Confidence**: 🟡 MEDIUM (needs follow-through volume on day 2)
-
-</td></tr>
-<tr><td>
-
-**🤖 AI Analysis (Claude Sonnet 4)**
-
+**AI Analysis**
 > "Recent news highlights supply chain concerns and analyst downgrade, but fundamentals remain strong. Oversold condition appears technical vs. fundamental shift. Historical pattern shows RSI <25 preceded +8-12% rallies in 6 of last 7 occurrences."
 
-</td></tr>
-</table>
+### Swing Trade Signal
 
-### 📈 Swing Trade Signal
+```
+TICKER: PLTR | Price: $42.15 | Signal: LONG | Strategy: Golden Cross
+```
 
-<table>
-<tr><td colspan="2">
-
-**TICKER: PLTR** | $42.15 | **Signal: 🟢 LONG** | Strategy: Golden Cross Setup
-
-</td></tr>
-<tr>
-<td width="50%">
-
-**📊 EMA Alignment**
-
+**EMA Alignment**
 ```
 Price:   $42.15 ▲
          ├─ 20 EMA:  $41.80 (bullish)
          ├─ 50 EMA:  $40.50 (crossed above ✓)
          └─ 100 EMA: $38.20 (support)
+
+All EMAs rising → Strong uptrend
 ```
 
-**All EMAs rising → Strong uptrend**
+**Trade Levels**
+- Entry: $42.00-$42.50
+- Stop Loss: $39.80 (below 50 EMA)
+- Target 1: $45.50 (2:1 R/R)
+- Target 2: $48.00 (3:1 R/R)
 
-</td>
-<td width="50%">
+**Confirmation Signals**
+- ✅ 20 EMA crossed 50 EMA 3 days ago (momentum established)
+- ✅ Volume: 142M (180% of average, institutional interest)
+- ✅ All EMAs rising (trend strength)
+- ✅ Price consolidating above 20 EMA (healthy pullback)
 
-**🎯 Trade Levels**
+**Confidence: HIGH**
 
-| Level | Price | Risk/Reward |
-|-------|-------|-------------|
-| **Entry** | $42.00-$42.50 | - |
-| **Stop** | $39.80 | (below 50 EMA) |
-| **Target 1** | $45.50 | 2:1 R/R |
-| **Target 2** | $48.00 | 3:1 R/R |
-
-</td>
-</tr>
-<tr><td colspan="2">
-
-**🔍 Confirmation Signals**
-
-✅ 20 EMA crossed 50 EMA 3 days ago (momentum established)
-✅ Volume on breakout: 142M (180% of average - institutional interest)
-✅ All EMAs rising (trend strength confirmation)
-✅ Price consolidating above 20 EMA (healthy pullback)
-
-**Confidence**: 🟢 HIGH
-
-**Reasoning**: Classic golden cross setup with strong momentum confirmation. Volume surge validates institutional interest. Risk well-defined at 50 EMA support.
-
-</td></tr>
-</table>
+Classic golden cross with strong momentum confirmation. Volume surge validates institutional interest. Risk well-defined at 50 EMA support.
 
 ---
 
