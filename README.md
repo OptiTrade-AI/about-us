@@ -267,112 +267,31 @@ Price:   $42.15 ▲
 
 ## Who This Is For
 
-<table>
-<tr>
-<td width="50%">
+**Income-Focused Options Sellers**
+- Weekly CSP/PCS screeners with Greeks + technical filters
+- Pre-filtered trades with defined risk parameters
 
-### 💰 Income-Focused Options Sellers
+**Momentum/Swing Traders**
+- Daily EMA crossover signals across thousands of tickers
+- LONG/SHORT setups with risk/reward levels
 
-*"I want 3-5% monthly returns selling premium."*
+**Aggressive Short-Term Traders**
+- Extreme RSI reversals (calls <20, puts >70) with Bollinger Band confirmation
+- Mean reversion plays at statistical extremes
 
-**Use Case**: Weekly CSP/PCS screeners
-**What You Get**: Pre-filtered trades with defined risk
-**Edge**: Greeks + technical + liquidity filters
-**Time Saved**: 90% vs. manual scanning
-
----
-
-### 🎯 Momentum/Swing Traders
-
-*"I trade EMA crossovers but can't scan thousands of stocks daily."*
-
-**Use Case**: Daily swing signal alerts at close
-**What You Get**: LONG/SHORT setups with R/R levels
-**Edge**: Multi-timeframe confluence + volume
-**Advantage**: Catch setups within 24hrs vs. 3 days late
-
-</td>
-<td width="50%">
-
-### ⚡ Aggressive Short-Term Traders
-
-*"I scalp extreme RSI reversals on high IV tickers."*
-
-**Use Case**: Post-market aggressive options pipeline
-**What You Get**: RSI <20 calls / >70 puts + BB confirm
-**Edge**: Mean reversion at statistical extremes
-**Reality Check**: 35% win rate, 3:1 R/R needs discipline
-
----
-
-### 🔬 Quantitative Developers
-
-*"I need clean data + APIs to build custom strategies."*
-
-**Use Case**: FastAPI endpoints for programmatic access
-**What You Get**: JSON with indicators + Greeks
-**Tech**: Async Python, Pydantic, OpenAPI docs
-**Build**: White-label, ML models, trade bots
-
-</td>
-</tr>
-</table>
+**Quantitative Developers**
+- FastAPI endpoints with JSON indicators + Greeks
+- Build custom strategies, ML models, or trade bots
 
 ---
 
 ## Why We're Different
 
-<table>
-<tr>
-<td width="33%">
+**Transparency**: Open-source core (BSL 1.1), all calculations visible, historical JSON exports
 
-### 🔍 Transparency Over Mystery
+**Precision**: Statistical edges with defined risk/reward, no hype or unrealistic promises
 
-**Most Platforms:**
-- ❌ Proprietary "AI scores"
-- ❌ Black-box algorithms
-- ❌ Claims without backtests
-
-**OptiTrade AI:**
-- ✅ Open-source core (BSL 1.1)
-- ✅ Every calculation visible
-- ✅ Historical JSON exports
-- ✅ No magic—just math
-
-</td>
-<td width="33%">
-
-### 🎯 Precision Over Hype
-
-**We DON'T Promise:**
-- ❌ "95% win rates"
-- ❌ "Triple your account"
-- ❌ "Never lose again"
-
-**We DO Provide:**
-- ✅ Statistical edges
-- ✅ Risk/reward clarity
-- ✅ Execution tools
-- ✅ Learning data
-
-</td>
-<td width="33%">
-
-### ⚙️ Production-Grade Code
-
-**Not a Weekend Project:**
-- ✅ FastAPI + Pydantic
-- ✅ Async concurrency
-- ✅ Docker deployments
-- ✅ Error handling
-- ✅ Rate limiting
-- ✅ Structured logging
-
-**Built by traders who code**
-
-</td>
-</tr>
-</table>
+**Production-Grade**: FastAPI + async concurrency, Docker deployments, structured logging
 
 ---
 
@@ -545,160 +464,26 @@ async def scan_watchlist(tickers):
 
 ---
 
-## Open Source + Licensing
+## Licensing
 
-### Why BSL 1.1?
+**Business Source License 1.1 (BSL 1.1)**
 
-We use **Business Source License 1.1** (not GPL or MIT):
+Permitted: Personal use, study, modification, self-hosting
+Restricted: Commercial SaaS deployment, white-labeling
+Converts to Apache 2.0 after 4 years
 
-**You CAN:**
-- Use it for personal trading
-- Study the code
-- Modify for personal use
-- Self-host for internal research
-- Build on top of it
-
-**You CANNOT (without license):**
-- Sell access to the platform
-- Offer it as a SaaS product
-- White-label for commercial deployment
-
-**After 4 years:** Code converts to Apache 2.0 (fully open)
-
-**Why this model?**
-- Protects our business model
-- Keeps core transparent
-- Enables community innovation
-- Balances openness + sustainability
-
-**Need a commercial license?** Email: jjdev@optitrade-ai.com
+Commercial license: jjdev@optitrade-ai.com
 
 ---
 
-## Risk & Reality
+## Risk Disclaimer
 
-### What We Won't Tell You
-
-- ❌ "This strategy is guaranteed"
-- ❌ "You'll never lose money"
-- ❌ "Quit your job after 3 months"
-- ❌ "AI predicts the future"
-
-### What We Will Tell You
-
-**Options trading is hard:**
-- Most retail traders lose money
-- Even good strategies have losing streaks
-- Position sizing > strategy selection
-- Psychology matters more than analysis
-
-**This platform helps by:**
-- Automating tedious analysis
-- Providing statistical edges
-- Enforcing defined-risk parameters
-- Tracking historical results
-
-**You still need:**
-- Risk management discipline
-- Emotional control
-- Capital you can afford to lose
-- Continuous learning
-
-**Our philosophy:**
-> "Give a trader a signal, they make one trade. Teach them the system, they iterate forever."
+Options trading involves substantial risk. This platform provides statistical edges and automation, not guarantees. Most retail traders lose money. Position sizing and risk management are essential.
 
 ---
 
-## Roadmap
+## Contact
 
-### Shipping Now
-- ✅ CSP/PCS screeners with full metrics
-- ✅ Aggressive options pipeline
-- ✅ Swing trade EMA strategies
-- ✅ Claude Sonnet 4 sentiment analysis
-- ✅ Discord automation + Streamlit dashboards
-- ✅ FastAPI with async support
-
-### Next 6 Months
-- 🔄 Machine learning win probability models (XGBoost on historical data)
-- 🔄 Backtesting framework with walk-forward analysis
-- 🔄 Telegram bot support (in addition to Discord)
-- 🔄 Real-time WebSocket streaming (current = 15-min delayed)
-- 🔄 Mobile app (React Native) for alerts
-
-### Future Vision
-- 📋 Paper trading sandbox with simulated fills
-- 📋 Portfolio analytics (track your actual P&L)
-- 📋 Social sentiment (Reddit WSB, Twitter/X aggregation)
-- 📋 Futures options (when Polygon.io supports)
-- 📋 Multi-broker integration (IBKR, TD Ameritrade, Robinhood)
-
----
-
-## Get Involved
-
-### For Traders
-- **Discord Community**: Share setups, discuss signals, learn together
-- **Beta Testing**: Try new features early, provide feedback
-- **Backtesting**: Share your results, improve the filters
-
-### For Developers
-- **Contribute**: Fork the repo, submit PRs for features/fixes
-- **Build Integrations**: Connect to your own tools/brokers
-- **Extend Strategies**: Add new technical indicators or options strategies
-
-### For Researchers
-- **Publish Findings**: Use the data for academic research
-- **Validate Approaches**: Backtest our signals vs. your models
-- **Collaborate**: Partner on quantitative research projects
-
-**Contributing Guide:** See `docs/development-guide.md`
-
----
-
-## Connect & Support
-
-**💬 Community**
-- Discord: [Join the community](#) (trading discussions, strategy help)
-- GitHub Discussions: [Ask questions, share ideas](https://github.com/optitrade-ai/optitrade-core/discussions)
-
-**📧 Contact**
-- General: support@optitrade-ai.com
-- Commercial Licensing: jjdev@optitrade-ai.com
-- Bugs/Features: [GitHub Issues](https://github.com/optitrade-ai/optitrade-core/issues)
-
-**📚 Learn More**
-- API Docs: See `CLAUDE.md` and `docs/api-reference.md`
-- Architecture: See `CODEBASE_WIKI.md`
-- Scripts Guide: See `SCRIPTS_GUIDE.md`
-
----
-
-## Final Thoughts
-
-**OptiTrade AI is not a magic money printer.** It's a **quantitative toolbox** for traders who:
-- Respect the market's randomness
-- Value data over opinions
-- Understand that edge = consistency over time
-- Want to automate the boring parts and focus on execution
-
-We built this because **scanning 2,000 tickers daily by hand is insane**, but ignoring 1,990 of them is leaving money on the table.
-
-**If you're looking for:**
-- "Get rich quick" schemes → Look elsewhere
-- Passive income with zero work → Not happening
-- Guaranteed winners → Doesn't exist
-
-**If you want:**
-- Statistical edges with transparent methodology
-- Automation to save 10+ hours per week
-- Tools to test, learn, and improve
-- A community of data-driven traders
-
-**Welcome. Let's build.**
-
----
-
-**Trade smarter. Code better. Automate relentlessly.**
-
-*OptiTrade AI — Where quantitative rigor meets practical trading.*
+- **Commercial Licensing**: jjdev@optitrade-ai.com
+- **Support**: support@optitrade-ai.com
+- **Contributing**: See `docs/development-guide.md`
