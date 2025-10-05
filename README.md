@@ -175,30 +175,37 @@ TICKER: NVDA | Price: $118.20 | STATUS: EXTREME OVERSOLD
 
 **RSI Gauge**
 
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': { 'fontSize':'14px'}}}%%
+graph LR
+    A[0<br/>Extreme] --- B[20<br/>●24]
+    B --- C[30<br/>Oversold]
+    C --- D[50<br/>Neutral]
+    D --- E[70<br/>Overbought]
+    E --- F[100<br/>Extreme]
+
+    style B fill:#f44336,stroke:#c62828,color:#fff,stroke-width:3px
+    style C fill:#FF9800,stroke:#E65100,color:#fff
+    style D fill:#4CAF50,stroke:#2E7D32,color:#fff
+    style E fill:#FF9800,stroke:#E65100,color:#fff
+    style F fill:#f44336,stroke:#c62828,color:#fff
 ```
- 0    20   30      50      70   80  100
- ├────┼────┼───────┼───────┼────┼────┤
- │ Extreme │ Oversold │ Neutral │ Overbought │
-      ▲
-      │
-   RSI: 24 (EXTREME FEAR)
+
+**Price vs Bollinger Bands (Last 10 Days)**
+
+```mermaid
+%%{init: {'theme':'base'}}%%
+xychart-beta
+    title "NVDA Price Action - Extreme Oversold"
+    x-axis ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10"]
+    y-axis "Price ($)" 115 --> 128
+    line "Upper BB" [127, 127, 127, 126, 126, 125, 125, 124, 123, 123]
+    line "20-day SMA" [122, 122, 122, 121, 121, 120, 120, 119, 119, 118]
+    line "Lower BB" [117, 117, 117, 116, 116, 115, 115, 114, 115, 115]
+    line "Price" [121, 120, 119, 118, 117, 116, 115, 116, 117, 118.2]
 ```
 
-**Price vs Bollinger Bands**
-
-```
-Upper BB ─────────────────────────────────
-
-                                          Gap
-
-Price: $118.20 ──────────► ●
-                            │
-                            │ $4.80 below (2.2σ deviation)
-                            │
-Lower BB ───────────────────┴─────────────
-
-Strike Target: $120 (mean reversion play)
-```
+**Technical Context**: Price $4.80 below lower BB (2.2σ deviation) — Strike Target: $120 (mean reversion play)
 
 **Volume Analysis**
 
@@ -491,3 +498,4 @@ Options trading involves substantial risk. This platform provides statistical ed
 
 - **Commercial Licensing**: jjdev@optitrade-ai.com
 - **Support**: support@optitrade-ai.com
+- **Contributing**: See `docs/development-guide.md`
