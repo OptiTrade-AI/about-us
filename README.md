@@ -1,6 +1,6 @@
 # OptiTrade AI
 
-**Data-driven intelligence for options traders and algorithmic enthusiasts**
+> **Smart options analysis that actually works.** We scan 3,800+ stocks daily, identify high-probability setups, and deliver them before market open.
 
 ---
 
