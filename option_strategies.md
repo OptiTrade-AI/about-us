@@ -306,58 +306,6 @@ Example: $10,000 × 2% = $200 max risk per trade
 
 ---
 
-## 🚀 Getting Started Action Plan
-
-### **Week 1-2: Foundation**
-- [ ] Open paper trading account
-- [ ] Master calls vs puts mechanics
-- [ ] Understand ITM/ATM/OTM
-- [ ] Practice reading option chains
-
-### **Week 3-4: First Strategy**
-- [ ] Start with cash-secured puts
-- [ ] Paper trade 5 positions
-- [ ] Track P&L and mistakes
-- [ ] Review each trade's outcome
-
-### **Month 2: Expand**
-- [ ] Add covered calls (if own stock)
-- [ ] Try one spread strategy
-- [ ] Keep position size small (1-2%)
-- [ ] Join options trading community
-
-### **Month 3: Refine**
-- [ ] Develop personal trading rules
-- [ ] Create watchlist of 10-15 stocks
-- [ ] Set weekly/monthly goals
-- [ ] Review and adjust strategy
-
----
-
-## 🎯 Performance Tracking Template
-
-### **Monthly Review Dashboard**
-```
-Month: _________    Starting Capital: $________
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Strategy         Trades    Win%    P&L
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Cash-Secured Put   [ ]     [ ]%    $[ ]
-Covered Call       [ ]     [ ]%    $[ ]
-Bull Put Spread    [ ]     [ ]%    $[ ]
-Iron Condor        [ ]     [ ]%    $[ ]
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-TOTAL:            [ ]     [ ]%    $[ ]
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Best Trade: _________________ (+$____)
-Worst Trade: ________________ (-$____)
-Lessons Learned: _____________________
-```
-
----
-
 ## 💎 Pro Tips from Experienced Traders
 
 ### **"The Wisdom Collection"**
@@ -395,24 +343,6 @@ Lessons Learned: _____________________
 3. Know your broker's margin requirements
 4. Understand tax implications
 5. Never trade with money you can't afford to lose
-
----
-
-## 📚 Resources & Tools
-
-### **Essential Tools**
-- **Options Chains:** Your broker platform
-- **IV Rank/Percentile:** Market Chameleon, TastyWorks
-- **Profit Calculator:** OptionsProfitCalculator.com
-- **Greeks Viewer:** Your broker or OptionStrat
-- **Screeners:** Barchart, FinViz
-
-### **Education Path**
-1. **Start Here:** CBOE Options Institute
-2. **Video Learning:** TastyTrade, OptionAlpha
-3. **Books:** "Options as a Strategic Investment" - McMillan
-4. **Practice:** Paper trade for 3+ months
-5. **Community:** r/options, Elite Trader
 
 ---
 
