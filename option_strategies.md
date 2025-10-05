@@ -36,12 +36,11 @@ Defined risk with clear profit targets
 ### 🔮 Advanced Strategies
 Complex multi-leg positions for experienced traders
 
-| Strategy | **Iron Condor** | **Butterfly** | **Straddle** | **Calendar Spread** |
-|:---------|:---------------|:--------------|:-------------|:-------------------|
-| **🎭 Complexity** | High (4 legs) | High (3 legs) | Medium (2 legs) | Medium (2 legs) |
-| **📐 Shape** | Range profit | Peak profit | V-shaped | Time-based |
-| **💎 Ideal For** | Low volatility | Precision target | Big moves | Theta harvest |
-| **🎲 Win Rate** | 60-70% | 30-40% | 30-40% | 50-60% |
+| Strategy | **Iron Condor** | **Butterfly** | **Straddle** | **Strangle** | **Calendar Spread** |
+|:---------|:---------------|:--------------|:-------------|:-------------|:-------------------|
+| **🎭 Complexity** | High (4 legs) | High (3 legs) | Medium (2 legs) | Medium (2 legs) | Medium (2 legs) |
+| **📐 Shape** | Range profit | Peak profit | V-shaped | V-shaped (wider) | Time-based |
+| **💎 Ideal For** | Low volatility | Precision target | Big moves | Bigger moves | Theta harvest |
 
 ---
 
