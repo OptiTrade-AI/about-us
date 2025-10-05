@@ -22,7 +22,6 @@ Perfect for those starting their options journey
 | **💰 Max Profit** | Premium received | Premium + appreciation |
 | **🔒 Capital Need** | 100 × Strike price | 100 shares owned |
 | **⏰ Best Time** | High IV, before support | Range-bound markets |
-| **✅ Win Rate** | 60-70% | 60-70% |
 
 ### 🔷 Spread Strategies
 Defined risk with clear profit targets
