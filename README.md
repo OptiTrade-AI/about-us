@@ -134,26 +134,25 @@ TICKER: HOOD | Price: $28.50 | RSI: 42 (Neutral) | 15% below 50-day SMA
 
 **Price & Strike Levels**
 
-```mermaid
-graph TD
-    A[Current Price: $28.50] -->|5.3% buffer| B[Strike: $27.00]
-    B -->|Premium: $1.15| C[Break-Even: $25.85]
-    C -->|9.3% cushion| D[Max Loss Point]
-
-    style A fill:#2196F3,stroke:#1565C0,color:#fff
-    style B fill:#4CAF50,stroke:#2E7D32,color:#fff
-    style C fill:#FF9800,stroke:#E65100,color:#fff
-    style D fill:#f44336,stroke:#c62828,color:#fff
+```
+Current Price ───────► $28.50
+                         │
+                         │ 5.3% buffer
+                         │
+Strike Price ────────► $27.00
+                         │
+                         │ Premium: $1.15
+                         │
+Break-Even ──────────► $25.85 (9.3% cushion from current)
 ```
 
-**Return Profile**
+**Return Metrics**
 
-```mermaid
-%%{init: {'theme':'base'}}%%
-pie title Trade Metrics
-    "ROR: 4.44%" : 444
-    "Annualized: 58%" : 5800
-    "Collateral: $2,700" : 2700
+```
+ROR:         4.44%  ████████░░░░░░░░░░░░░░░░░░░░░░░░ (58% annualized)
+Collateral: $2,700  ██████████████████████████████████████
+Profit:       $115  ███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+Max Loss:   $2,585  ████████████████████████████████████░░
 ```
 
 **Options Setup**
@@ -174,36 +173,39 @@ pie title Trade Metrics
 TICKER: NVDA | Price: $118.20 | STATUS: EXTREME OVERSOLD
 ```
 
-**RSI & Momentum Gauge**
+**RSI Gauge**
 
-```mermaid
-%%{init: {'theme':'base'}}%%
-graph LR
-    A[RSI: 0] -->|Extreme| B[20]
-    B -->|Current: 24| C[30]
-    C -->|Oversold Zone| D[50]
-    D -->|Neutral| E[70]
-    E -->|Overbought| F[100]
-
-    style B fill:#f44336,stroke:#c62828,color:#fff
-    style C fill:#FF9800,stroke:#E65100,color:#fff
-    style D fill:#4CAF50,stroke:#2E7D32,color:#fff
+```
+ 0    20   30      50      70   80  100
+ ├────┼────┼───────┼───────┼────┼────┤
+ │ Extreme │ Oversold │ Neutral │ Overbought │
+      ▲
+      │
+   RSI: 24 (EXTREME FEAR)
 ```
 
-**Price Action Visualization**
+**Price vs Bollinger Bands**
 
-```mermaid
-graph TD
-    A[Upper BB] -->|Gap| B[Price: $118.20]
-    B -->|$4.80 below| C[Lower BB: 2.2σ]
-    C -->|Mean Reversion Target| D[Strike: $120]
+```
+Upper BB ─────────────────────────────────
 
-    E[Volume: 185M] -->|240% avg| F[Capitulation Signal]
+                                          Gap
 
-    style B fill:#f44336,stroke:#c62828,color:#fff
-    style C fill:#FF9800,stroke:#E65100,color:#fff
-    style D fill:#4CAF50,stroke:#2E7D32,color:#fff
-    style F fill:#2196F3,stroke:#1565C0,color:#fff
+Price: $118.20 ──────────► ●
+                            │
+                            │ $4.80 below (2.2σ deviation)
+                            │
+Lower BB ───────────────────┴─────────────
+
+Strike Target: $120 (mean reversion play)
+```
+
+**Volume Analysis**
+
+```
+Volume:       185M  ██████████████████████████████████████████████ (240% of avg)
+30-day Avg:    77M  ███████████████████
+                    └─── Capitulation Signal ───┘
 ```
 
 **Trade Setup**
@@ -222,43 +224,38 @@ TICKER: PLTR | Price: $42.15 | Signal: LONG | Strategy: Golden Cross
 
 **EMA Stack (Bullish Alignment)**
 
-```mermaid
-graph TD
-    A[Price: $42.15] -->|Above all EMAs| B[20 EMA: $41.80]
-    B -->|Crossed 3 days ago| C[50 EMA: $40.50]
-    C -->|Strong support| D[100 EMA: $38.20]
-
-    style A fill:#4CAF50,stroke:#2E7D32,color:#fff
-    style B fill:#8BC34A,stroke:#558B2F,color:#fff
-    style C fill:#CDDC39,stroke:#9E9D24,color:#000
-    style D fill:#FFC107,stroke:#F57C00,color:#000
-
-    E[All EMAs Rising] -->|Confirms| F[Strong Uptrend]
-    style F fill:#2196F3,stroke:#1565C0,color:#fff
+```
+Price:     $42.15  ●━━━━━━━━━━━━━━━━━━━━━━━━▶ ▲
+                   │
+20 EMA:    $41.80  ├───────────────────────▶
+                   │
+50 EMA:    $40.50  ├─────────────────▶ (crossed 3 days ago)
+                   │
+100 EMA:   $38.20  ├───────────▶
+                   │
+                   All EMAs Rising → Strong Uptrend
 ```
 
 **Risk/Reward Profile**
 
-```mermaid
-graph TD
-    A[Target 2: $48.00<br/>+$5.85 profit<br/>3:1 R/R] -->|Take partial| B[Target 1: $45.50<br/>+$3.35 profit<br/>2:1 R/R]
-    B -->|Hold from| C[Entry: $42.00-$42.50<br/>Current: $42.15]
-    C -->|Stop below 50 EMA| D[Stop Loss: $39.80<br/>-$2.35 risk]
-
-    style A fill:#4CAF50,stroke:#2E7D32,color:#fff
-    style B fill:#8BC34A,stroke:#558B2F,color:#fff
-    style C fill:#2196F3,stroke:#1565C0,color:#fff
-    style D fill:#f44336,stroke:#c62828,color:#fff
+```
+Target 2:   $48.00  ┃━━━━━━━━━━┫  +$5.85 (3:1 R/R) 🎯
+                    ┃          ┃
+Target 1:   $45.50  ┃━━━━━┫    ┃  +$3.35 (2:1 R/R) 🎯
+                    ┃     ┃    ┃
+Entry:      $42.15  ●─────┼────┼── Current Position
+                    ┃     ┃    ┃
+Stop Loss:  $39.80  ┗━━━━━┛    ┃  -$2.35 (risk defined)
+                          ▲
+                    Below 50 EMA
 ```
 
 **Volume Confirmation**
 
-```mermaid
-%%{init: {'theme':'base'}}%%
-pie title Volume Analysis
-    "Breakout Volume: 142M" : 142
-    "Average Volume: 79M" : 79
-    "180% Above Average" : 63
+```
+Breakout Vol: 142M  ██████████████████████████████████████████████ (180% of avg)
+Average Vol:   79M  █████████████████████████
+                    └─── Strong Institutional Interest ───┘
 ```
 
 **Confirmation Signals**
