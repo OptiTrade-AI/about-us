@@ -491,4 +491,3 @@ Options trading involves substantial risk. This platform provides statistical ed
 
 - **Commercial Licensing**: jjdev@optitrade-ai.com
 - **Support**: support@optitrade-ai.com
-- **Contributing**: See `docs/development-guide.md`
