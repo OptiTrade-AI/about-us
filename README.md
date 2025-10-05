@@ -132,18 +132,33 @@ graph TB
 TICKER: HOOD | Price: $28.50 | RSI: 42 (Neutral) | 15% below 50-day SMA
 ```
 
-**Options Setup**
-- Strike: $27.00
-- Days to Expiration: 28
-- Premium: $1.15/share ($115 per contract)
-- Delta: -0.32 | IV: 68% | Open Interest: 842
+**Price & Strike Levels**
 
-**Financial Metrics**
-- Return on Risk: 4.44% (58% annualized)
-- Break-Even: $25.85 (9.3% cushion)
-- Probability of Profit: ~68%
-- Collateral Required: $2,700
-- Max Loss: $2,585
+```mermaid
+graph TD
+    A[Current Price: $28.50] -->|5.3% buffer| B[Strike: $27.00]
+    B -->|Premium: $1.15| C[Break-Even: $25.85]
+    C -->|9.3% cushion| D[Max Loss Point]
+
+    style A fill:#2196F3,stroke:#1565C0,color:#fff
+    style B fill:#4CAF50,stroke:#2E7D32,color:#fff
+    style C fill:#FF9800,stroke:#E65100,color:#fff
+    style D fill:#f44336,stroke:#c62828,color:#fff
+```
+
+**Return Profile**
+
+```mermaid
+%%{init: {'theme':'base'}}%%
+pie title Trade Metrics
+    "ROR: 4.44%" : 444
+    "Annualized: 58%" : 5800
+    "Collateral: $2,700" : 2700
+```
+
+**Options Setup**
+- Strike: $27.00 | DTE: 28 | Premium: $1.15/share ($115 per contract)
+- Delta: -0.32 | IV: 68% | Open Interest: 842 | Profit Probability: ~68%
 
 **Technical Assessment**
 - ✅ Oversold setup (price between SMA and lower BB)
@@ -159,11 +174,37 @@ TICKER: HOOD | Price: $28.50 | RSI: 42 (Neutral) | 15% below 50-day SMA
 TICKER: NVDA | Price: $118.20 | STATUS: EXTREME OVERSOLD
 ```
 
-**Technical Triggers**
-- RSI: 24 (extreme fear)
-- Price vs Bollinger Band: $4.80 below lower band (2.2σ deviation)
-- Volume: 185M (240% of 30-day average)
-- EMA Trend: 20 EMA < 50 EMA (short-term weakness)
+**RSI & Momentum Gauge**
+
+```mermaid
+%%{init: {'theme':'base'}}%%
+graph LR
+    A[RSI: 0] -->|Extreme| B[20]
+    B -->|Current: 24| C[30]
+    C -->|Oversold Zone| D[50]
+    D -->|Neutral| E[70]
+    E -->|Overbought| F[100]
+
+    style B fill:#f44336,stroke:#c62828,color:#fff
+    style C fill:#FF9800,stroke:#E65100,color:#fff
+    style D fill:#4CAF50,stroke:#2E7D32,color:#fff
+```
+
+**Price Action Visualization**
+
+```mermaid
+graph TD
+    A[Upper BB] -->|Gap| B[Price: $118.20]
+    B -->|$4.80 below| C[Lower BB: 2.2σ]
+    C -->|Mean Reversion Target| D[Strike: $120]
+
+    E[Volume: 185M] -->|240% avg| F[Capitulation Signal]
+
+    style B fill:#f44336,stroke:#c62828,color:#fff
+    style C fill:#FF9800,stroke:#E65100,color:#fff
+    style D fill:#4CAF50,stroke:#2E7D32,color:#fff
+    style F fill:#2196F3,stroke:#1565C0,color:#fff
+```
 
 **Trade Setup**
 - Play: Buy $120 calls, 14-21 DTE
@@ -179,21 +220,46 @@ TICKER: NVDA | Price: $118.20 | STATUS: EXTREME OVERSOLD
 TICKER: PLTR | Price: $42.15 | Signal: LONG | Strategy: Golden Cross
 ```
 
-**EMA Alignment**
-```
-Price:   $42.15 ▲
-         ├─ 20 EMA:  $41.80 (bullish)
-         ├─ 50 EMA:  $40.50 (crossed above ✓)
-         └─ 100 EMA: $38.20 (support)
+**EMA Stack (Bullish Alignment)**
 
-All EMAs rising → Strong uptrend
+```mermaid
+graph TD
+    A[Price: $42.15] -->|Above all EMAs| B[20 EMA: $41.80]
+    B -->|Crossed 3 days ago| C[50 EMA: $40.50]
+    C -->|Strong support| D[100 EMA: $38.20]
+
+    style A fill:#4CAF50,stroke:#2E7D32,color:#fff
+    style B fill:#8BC34A,stroke:#558B2F,color:#fff
+    style C fill:#CDDC39,stroke:#9E9D24,color:#000
+    style D fill:#FFC107,stroke:#F57C00,color:#000
+
+    E[All EMAs Rising] -->|Confirms| F[Strong Uptrend]
+    style F fill:#2196F3,stroke:#1565C0,color:#fff
 ```
 
-**Trade Levels**
-- Entry: $42.00-$42.50
-- Stop Loss: $39.80 (below 50 EMA)
-- Target 1: $45.50 (2:1 R/R)
-- Target 2: $48.00 (3:1 R/R)
+**Risk/Reward Profile**
+
+```mermaid
+graph TD
+    A[Target 2: $48.00<br/>+$5.85 profit<br/>3:1 R/R] -->|Take partial| B[Target 1: $45.50<br/>+$3.35 profit<br/>2:1 R/R]
+    B -->|Hold from| C[Entry: $42.00-$42.50<br/>Current: $42.15]
+    C -->|Stop below 50 EMA| D[Stop Loss: $39.80<br/>-$2.35 risk]
+
+    style A fill:#4CAF50,stroke:#2E7D32,color:#fff
+    style B fill:#8BC34A,stroke:#558B2F,color:#fff
+    style C fill:#2196F3,stroke:#1565C0,color:#fff
+    style D fill:#f44336,stroke:#c62828,color:#fff
+```
+
+**Volume Confirmation**
+
+```mermaid
+%%{init: {'theme':'base'}}%%
+pie title Volume Analysis
+    "Breakout Volume: 142M" : 142
+    "Average Volume: 79M" : 79
+    "180% Above Average" : 63
+```
 
 **Confirmation Signals**
 - ✅ 20 EMA crossed 50 EMA 3 days ago (momentum established)
