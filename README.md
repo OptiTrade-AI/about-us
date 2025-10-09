@@ -384,12 +384,6 @@ streamlit run scripts/dashboards/csp_screener_viewer.py
 # Risk: 5-7% of portfolio per trade (diversified)
 ```
 
-**Expected Outcome:**
-- 10-15 qualified opportunities per week
-- 72-78% historical win rate
-- 4-6% average ROR per trade
-- 48-72% annualized returns (if consistent)
-
 ---
 
 ### 2. Daily Aggressive Options Hunting
@@ -411,12 +405,6 @@ curl -X POST http://localhost:8080/api/polygon/ticker-buying-sentiment \
 # Execute 1-2 highest conviction setups
 ```
 
-**Expected Outcome:**
-- 5-10 daily opportunities (calls or puts)
-- 28-35% win rate (requires discipline)
-- +80-200% on winners | -50-100% on losers
-- Positive expectancy with 1-2% risk per trade
-
 ---
 
 ### 3. Swing Trading EMA Crossovers
@@ -434,12 +422,6 @@ streamlit run scripts/dashboards/swing_trades_viewer.py
 # Filter for HIGH confidence + strategy confluence
 # Enter trades next morning with defined stops
 ```
-
-**Expected Outcome:**
-- 15-25 signals per day
-- 52-58% win rate
-- +8-12% on winners | -3-5% on losers
-- ~2:1 risk-reward ratio
 
 ---
 
