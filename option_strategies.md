@@ -309,24 +309,6 @@ Risk:     UNLIMITED ← → → CAPPED PROFIT → ← → CREDIT KEPT
 - ✅ High IV environment for better credits
 - ✅ Confident stock won't crash through support
 
-#### **⚠️ Critical Warnings**
-- 🔴 **UNLIMITED DOWNSIDE RISK** - This is NOT a beginner strategy
-- 🔴 Naked short put exposure (2 sold, only 1 bought)
-- 🔴 Requires significant margin/buying power
-- 🔴 Can result in catastrophic losses in crash scenarios
-- 🔴 Assignment risk on short puts if deep ITM
-- 🔴 Avoid during earnings or major news events
-
-#### **🛡️ Risk Management for Ratio Spreads**
-```
-Position Sizing:     Use TINY positions (max 0.5-1% account risk)
-Stop Loss:          Close entire spread if stock breaks lower strike
-Max Positions:      Limit to 1-2 ratio spreads maximum
-Support Levels:     Only trade above very strong technical support
-Avoid Before:       Earnings, Fed meetings, major news, high uncertainty
-Monitor Daily:      Check position at least once per day
-Have Exit Plan:     Know exactly when you'll close (don't hope!)
-```
 
 #### **Why This Strategy Is Dangerous**
 ```
