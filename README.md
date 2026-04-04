@@ -154,4 +154,4 @@ MIT License — free to use, modify, and distribute.
 
 ---
 
-**Email**: jjdev@optitrade-ai.com | **GitHub**: [OptiTrade-AI/optitrade-service](https://github.com/OptiTrade-AI/optitrade-service)
+**Email**: jjdev@optitrade-ai.com
